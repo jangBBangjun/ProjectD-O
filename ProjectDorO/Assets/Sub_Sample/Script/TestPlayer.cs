@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem; // Input System 직접 사용
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class TestPlayer : MonoBehaviour
@@ -21,63 +21,91 @@ public class TestPlayer : MonoBehaviour
     private bool isGrounded;
 
     private Animator animator;
-    private readonly int hashMoveSpeed = Animator.StringToHash("MoveSpeed");
 
     private AiMove ai;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
         ai = GetComponent<AiMove>();
     }
 
     private void Update()
     {
         if (controller.enabled)
+        {
             HandleMovement();
+            HandleAttack();
+        }
+    }
+
+    void HandleAttack()
+    {
+        if (Mouse.current.leftButton.isPressed)
+            animator.Play("Attack");
+        else if (Keyboard.current.qKey.isPressed)
+            animator.Play("Skill_1");
+        else if (Keyboard.current.eKey.isPressed)
+            animator.Play("Skill_2");
+        else if (Keyboard.current.rKey.isPressed)
+            animator.Play("Skill_3");
     }
 
     void HandleMovement()
     {
         isGrounded = controller.isGrounded;
+
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2f;
         }
 
-        // ✅ 키보드 입력 → 방향 계산
-        Vector2 moveInput = Vector2.zero;
+        // ✅ 입력 받기
+        Vector2Int moveInput = Vector2Int.zero;
         if (Keyboard.current.wKey.isPressed) moveInput.y += 1;
         if (Keyboard.current.sKey.isPressed) moveInput.y -= 1;
         if (Keyboard.current.aKey.isPressed) moveInput.x -= 1;
         if (Keyboard.current.dKey.isPressed) moveInput.x += 1;
 
-        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+        // ✅ 카메라 기준 방향으로 이동 방향 계산
+        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
 
-        // ✅ 애니메이션
+        // ✅ 애니메이션 (방향 무시, 걷기/정지만)
         if (animator != null)
         {
-            animator.SetFloat(hashMoveSpeed, moveDirection.magnitude);
+            animator.SetInteger("moveZ", moveInput.y);
+            animator.SetInteger("moveX", moveInput.x);
         }
 
-        if (moveDirection.magnitude >= 0.1f)
+        moveDirection = mainCameraTransform.TransformDirection(moveDirection);
+        moveDirection.y = 0f;
+        moveDirection.Normalize();
+
+        // ✅ 캐릭터 방향 = 카메라 정면으로 고정
+        Vector3 camForward = mainCameraTransform.forward;
+        camForward.y = 0f;
+        camForward.Normalize();
+
+        if (camForward.sqrMagnitude > 0.1f)
         {
-            float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + mainCameraTransform.eulerAngles.y;
-            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Quaternion targetRotation = Quaternion.LookRotation(camForward);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            Vector3 moveVector = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveVector.normalized * moveSpeed * Time.deltaTime);
         }
 
-        // ✅ 점프 (Space 키)
+        // ✅ 이동 처리
+        if (moveDirection.magnitude > 0.1f)
+        {
+            controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
+
+        // ✅ 점프
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
 
-        // ✅ 중력 처리
+        // ✅ 중력 적용
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
