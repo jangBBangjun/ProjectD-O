@@ -40,6 +40,7 @@ public class TestManager : MonoBehaviour
 
         if (player != null)
         {
+            miniMapManager.SetTarget(player);
             testCam.SetTarget(player);
         }
     }

@@ -9,64 +9,88 @@ public enum IconType { Player, Unit, Enemy }
 
 public class MiniMapManager : MonoBehaviour
 {
-    [Header("필수 참조")]
+    private CharacterManager characterManager;
+
+    [Header("UI 참조")]
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform AllRect;
-    [SerializeField] private RectTransform minimapRect;
+    [SerializeField] private RectTransform moveRect;
+
+    [Header("아이콘")]
     [SerializeField] private Transform iconParent;
     [SerializeField] private Sprite iconSprite;
     [SerializeField] private float iconSize = 20f;
+
+    [Header("월드 좌표")]
+    [SerializeField] private Vector2 worldCenter = Vector2.zero;
     [SerializeField] private Vector2 worldSize = new Vector2(500, 500);
     [SerializeField] private Image selectionBoxImage;
 
-    [Header("Fog of War")]
+    [Header("추적")]
+    [SerializeField] private Transform target;
+    [SerializeField] private Camera minimapCamera;
+
+    [Header("시작 배치 가능 영역")]
+    [SerializeField] private Transform batchPoint;
+
+    [Header("유닛 배치 기능")]
+    [SerializeField] private Image dropImage;
+    [SerializeField] private Sprite[] playerSprites;
+
+    [Header("시야 확장 기능")]
     [SerializeField] private RawImage fogRawImage;
     [SerializeField] private int fogResolution = 256;
     [SerializeField] private float revealRadius = 8f;
     private Texture2D fogTexture;
     private Color32[] fogPixels;
 
-    [Header("배치")]
-    [SerializeField] private Transform batchPoint;
-
-    [Header("줌 설정")]
+    [Header("줌 기능")]
     [SerializeField] private float zoomStep = 50f;
     [SerializeField] private float minWorldSize = 100f;
     [SerializeField] private float maxWorldSize = 1000f;
-    private Vector2 originMinimapSize;
-    private bool isMiniMapMoving = false;
-    private Vector2 moveStartMouseScreenPos;
-    private Vector2 moveStartMapPos;
 
-    [Header("유닛 추적")]
+    [Header("유닛 추적 기능")]
     [SerializeField] private List<Target> targets = new List<Target>();
     [SerializeField] private List<Target> selectedTargets = new List<Target>();
 
-    [Header("외부 참조")]
-    [SerializeField] private CharacterManager characterManager;
-
-    private Vector2 currentMousePos;
-    private float scrollDelta;
+    private bool isMiniMapMoving = false;
     private bool altPressed;
+    private float scrollDelta;
+    private Vector2 originMinimapSize;
+    private Vector2 moveStartMouseScreenPos;
+    private Vector2 moveStartMapPos;
+    private Vector2 currentMousePos;
 
-    [Header("유닛 소환")]
-    [SerializeField] private Image dropImage;
-    [SerializeField] private Sprite[] playerSprites;
+    private void Awake()
+    {
+        characterManager = GetComponent<CharacterManager>();
+    }
 
-    void Start()
+    private void Start()
     {
         InitFog();
         RenderFog(WorldToFogCoord(batchPoint.position));
         FogTextureUpdate();
-        originMinimapSize = minimapRect.sizeDelta;
+        originMinimapSize = moveRect.sizeDelta;
+
+        CloseMap();
     }
 
-    void Update()
+    private void Update()
     {
         MoveIcon();
         UpdateFog();
-        HandleZoom();
-        HandleMiniMapDrag();
+    }
+
+    private IEnumerator HandleMiniMap()
+    {
+        while (true)
+        {
+            HandleZoom();
+            HandleMiniMapDrag();
+
+            yield return null;
+        }
     }
 
     // -------------------- InputSystem으로부터 연결되는 메서드 --------------------
@@ -95,26 +119,33 @@ public class MiniMapManager : MonoBehaviour
     {
         if (altPressed)
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(minimapRect, currentMousePos))
+            if (RectTransformUtility.RectangleContainsScreenPoint(moveRect, currentMousePos))
             {
                 isMiniMapMoving = true;
                 moveStartMouseScreenPos = currentMousePos;
-                moveStartMapPos = minimapRect.anchoredPosition;
+                moveStartMapPos = moveRect.anchoredPosition;
             }
         }
         else
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(minimapRect, currentMousePos, null, out Vector2 dragStart);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(moveRect, currentMousePos, null, out Vector2 dragStart);
             StartCoroutine(HandleSelection(dragStart, currentMousePos));
         }
     }
 
     public void OnRightClick()
     {
+        PlayerMoveAI();
+    }
+
+    // -------------------- 플레이어와 상호작용 --------------------
+
+    private void PlayerMoveAI()
+    {
         if (selectedTargets.Count == 0) return;
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            minimapRect,
+            moveRect,
             currentMousePos,
             canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
             out Vector2 localPoint
@@ -135,6 +166,10 @@ public class MiniMapManager : MonoBehaviour
         AllRect.anchorMax = new Vector2(0.5f, 0.5f);
         AllRect.anchoredPosition = Vector2.zero;
         AllRect.sizeDelta = new Vector2(1300, 1300);
+
+        TargetCenter();
+        StartCoroutine(nameof(HandleMiniMap));
+        StopCoroutine(nameof(UpdateTargetCenter));
     }
 
     public void CloseMap()
@@ -143,18 +178,21 @@ public class MiniMapManager : MonoBehaviour
         AllRect.anchorMax = new Vector2(0, 1);
         AllRect.anchoredPosition = new Vector2(150, -150);
         AllRect.sizeDelta = new Vector2(300, 300);
-        minimapRect.anchoredPosition = Vector2.zero;
-        minimapRect.sizeDelta = originMinimapSize;
+        moveRect.sizeDelta = originMinimapSize;
+
+        TargetCenter();
+        StopCoroutine(nameof(HandleMiniMap));
+        StartCoroutine(nameof(UpdateTargetCenter));
     }
 
     private void HandleZoom()
     {
         if (scrollDelta == 0) return;
-        if (!RectTransformUtility.RectangleContainsScreenPoint(minimapRect, currentMousePos)) return;
+        if (!RectTransformUtility.RectangleContainsScreenPoint(moveRect, currentMousePos)) return;
 
-        float newSizeX = Mathf.Clamp(minimapRect.sizeDelta.x + scrollDelta * zoomStep, minWorldSize, maxWorldSize);
-        float newSizeY = Mathf.Clamp(minimapRect.sizeDelta.y + scrollDelta * zoomStep, minWorldSize, maxWorldSize);
-        minimapRect.sizeDelta = new Vector2(newSizeX, newSizeY);
+        float newSizeX = Mathf.Clamp(moveRect.sizeDelta.x + scrollDelta * zoomStep, minWorldSize, maxWorldSize);
+        float newSizeY = Mathf.Clamp(moveRect.sizeDelta.y + scrollDelta * zoomStep, minWorldSize, maxWorldSize);
+        moveRect.sizeDelta = new Vector2(newSizeX, newSizeY);
         scrollDelta = 0;
     }
 
@@ -163,7 +201,7 @@ public class MiniMapManager : MonoBehaviour
         if (!isMiniMapMoving) return;
 
         Vector2 delta = currentMousePos - moveStartMouseScreenPos;
-        minimapRect.anchoredPosition = moveStartMapPos + delta;
+        moveRect.anchoredPosition = moveStartMapPos + delta;
 
         if (!Mouse.current.leftButton.isPressed)
             isMiniMapMoving = false;
@@ -178,7 +216,7 @@ public class MiniMapManager : MonoBehaviour
 
         while (Mouse.current.leftButton.isPressed)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(minimapRect, currentMousePos, null, out dragEnd);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(moveRect, currentMousePos, null, out dragEnd);
             Vector2 center = (dragStart + dragEnd) / 2f;
             Vector2 size = new Vector2(Mathf.Abs(dragStart.x - dragEnd.x), Mathf.Abs(dragStart.y - dragEnd.y));
             selectionBoxImage.rectTransform.anchoredPosition = center;
@@ -230,7 +268,7 @@ public class MiniMapManager : MonoBehaviour
 
     private void ResetIconColor(Target target)
     {
-        switch(target.type)
+        switch (target.type)
         {
             case IconType.Player:
                 target.image.color = Color.green;
@@ -299,9 +337,15 @@ public class MiniMapManager : MonoBehaviour
 
             // 아이콘 위치 갱신
             Vector3 pos = target.transform.position;
-            float xRatio = Mathf.InverseLerp(-worldSize.x / 2, worldSize.x / 2, pos.x) - 0.5f;
-            float yRatio = Mathf.InverseLerp(-worldSize.y / 2, worldSize.y / 2, pos.z) - 0.5f;
-            target.rectTransform.anchoredPosition = new Vector2(xRatio * minimapRect.rect.size.x, yRatio * minimapRect.rect.size.y);
+
+            float xNorm = Mathf.InverseLerp(worldCenter.x - worldSize.x / 2, worldCenter.x + worldSize.x / 2, pos.x);
+            float yNorm = Mathf.InverseLerp(worldCenter.y - worldSize.y / 2, worldCenter.y + worldSize.y / 2, pos.z);
+
+            Vector2 minimapSize = moveRect.rect.size;
+            float xPos = (xNorm - 0.5f) * minimapSize.x;
+            float yPos = (yNorm - 0.5f) * minimapSize.y;
+
+            target.rectTransform.anchoredPosition = new Vector2(xPos, yPos);
         }
     }
 
@@ -357,19 +401,26 @@ public class MiniMapManager : MonoBehaviour
 
     private Vector2 WorldToFogCoord(Vector3 worldPos)
     {
-        float x = Mathf.InverseLerp(-worldSize.x / 2, worldSize.x / 2, worldPos.x);
-        float y = Mathf.InverseLerp(-worldSize.y / 2, worldSize.y / 2, worldPos.z);
+        float x = Mathf.InverseLerp(
+            worldCenter.x - worldSize.x / 2, worldCenter.x + worldSize.x / 2, worldPos.x);
+        float y = Mathf.InverseLerp(
+            worldCenter.y - worldSize.y / 2, worldCenter.y + worldSize.y / 2, worldPos.z);
         return new Vector2(x, y) * fogResolution;
     }
 
-    private Vector3 FogCoordToWorld(Vector2 texPos)
+    private Vector3 FogCoordToWorld(Vector2 minimapLocalPoint)
     {
+        Vector2 minimapSize = moveRect.rect.size;
+        float normX = (minimapLocalPoint.x / minimapSize.x) + 0.5f;
+        float normY = (minimapLocalPoint.y / minimapSize.y) + 0.5f;
+
         return new Vector3(
-            (texPos.x / minimapRect.rect.size.x) * worldSize.x,
+            worldCenter.x - worldSize.x / 2 + normX * worldSize.x,
             0,
-            (texPos.y / minimapRect.rect.size.y) * worldSize.y
+            worldCenter.y - worldSize.y / 2 + normY * worldSize.y
         );
     }
+
 
     // -------------------- 유닛 배치 --------------------
     public void PlayerBatchButton(int num)
@@ -378,24 +429,52 @@ public class MiniMapManager : MonoBehaviour
         dropImage.sprite = playerSprites[num];
         StartCoroutine(DropImageRender(num));
     }
+
     private IEnumerator DropImageRender(int num)
     {
-        Vector2 localPoint = Vector2.zero;
+        Vector2 canvasLocalPoint = Vector2.zero;
+        Vector2 minimapLocalPoint = Vector2.zero;
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
 
         while (!Mouse.current.leftButton.wasPressedThisFrame)
         {
             Vector2 screenPoint = Mouse.current.position.ReadValue();
 
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.GetComponent<RectTransform>(), screenPoint, null, out localPoint))
+                canvasRect,
+                screenPoint,
+                canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+                out canvasLocalPoint))
             {
-                dropImage.rectTransform.localPosition = localPoint;
+                dropImage.rectTransform.localPosition = canvasLocalPoint;
             }
+
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                moveRect,
+                screenPoint,
+                canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+                out minimapLocalPoint
+            );
 
             yield return null;
         }
 
-        Vector3 worldPos = FogCoordToWorld(localPoint - minimapRect.anchoredPosition);
+        Vector2 finalScreenPoint = Mouse.current.position.ReadValue();
+        bool isInsideMinimap = RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            moveRect,
+            finalScreenPoint,
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+            out minimapLocalPoint
+        );
+
+        if (!isInsideMinimap)
+        {
+            Debug.LogWarning("미니맵 외곽입니다. 유닛 소환 취소.");
+            dropImage.gameObject.SetActive(false);
+            yield break;
+        }
+
+        Vector3 worldPos = FogCoordToWorld(minimapLocalPoint);
         Vector2 fogPos = WorldToFogCoord(worldPos);
         int x = Mathf.RoundToInt(fogPos.x);
         int y = Mathf.RoundToInt(fogPos.y);
@@ -420,6 +499,49 @@ public class MiniMapManager : MonoBehaviour
         dropImage.gameObject.SetActive(false);
     }
 
+    // -------------------- 선택된 플레이어 추적 --------------------
+
+    private IEnumerator UpdateTargetCenter()
+    {
+        while (true)
+        {
+            TargetCenter();
+
+            yield return null;
+        }
+    }
+    private void TargetCenter()
+    {
+        if (target == null)
+        {
+            moveRect.anchoredPosition = Vector2.zero;
+            return;
+        }
+
+        // 월드 좌표 → 정규화 (0~1)
+        float xNorm = Mathf.InverseLerp(
+            worldCenter.x - worldSize.x / 2, worldCenter.x + worldSize.x / 2,
+            target.position.x
+        );
+
+        float yNorm = Mathf.InverseLerp(
+            worldCenter.y - worldSize.y / 2, worldCenter.y + worldSize.y / 2,
+            target.position.z
+        );
+
+        // 정규화 → 미니맵 로컬 좌표로 변환 (중심 기준)
+        Vector2 minimapSize = moveRect.rect.size;
+        float xOffset = (xNorm - 0.5f) * minimapSize.x;
+        float yOffset = (yNorm - 0.5f) * minimapSize.y;
+
+        // 미니맵 전체를 반대로 이동시켜 target이 중앙으로 오게 함
+        moveRect.anchoredPosition = -new Vector2(xOffset, yOffset);
+    }
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
+
     // -------------------- 내부 클래스 --------------------
 
     [Serializable]
@@ -441,5 +563,14 @@ public class MiniMapManager : MonoBehaviour
     {
         if (targets.Exists(t => t.transform == targetTransform)) return;
         targets.Add(new Target(type, targetTransform));
+    }
+
+    // -------------------- 기즈모 --------------------
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawWireCube(new Vector3(worldCenter.x, 0, worldCenter.y), new Vector3(worldSize.x, 0, worldSize.y));
     }
 }
