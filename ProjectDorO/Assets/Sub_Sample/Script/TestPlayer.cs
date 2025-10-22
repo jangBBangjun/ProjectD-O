@@ -100,8 +100,10 @@ public class TestPlayer : MonoBehaviour
         }
 
         // ✅ 점프
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && stateInfo.IsName("Jump") == false)
         {
+            animator.SetTrigger("jump");
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
 
