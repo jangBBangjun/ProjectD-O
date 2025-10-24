@@ -21,6 +21,7 @@ public class TestPlayer : MonoBehaviour
     private bool isGrounded;
 
     private Animator animator;
+    private Sub_EffectPlayer playerEffect;
 
     private AiMove ai;
 
@@ -29,6 +30,7 @@ public class TestPlayer : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         ai = GetComponent<AiMove>();
+        playerEffect = GetComponent<Sub_EffectPlayer>();
     }
 
     private void Update()
@@ -42,14 +44,28 @@ public class TestPlayer : MonoBehaviour
 
     void HandleAttack()
     {
-        if (Mouse.current.leftButton.isPressed)
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (Mouse.current.leftButton.isPressed && stateInfo.IsName("Attack") == false)
+        {
+            playerEffect.Play(0);
             animator.Play("Attack");
-        else if (Keyboard.current.qKey.isPressed)
+        }
+        else if (Keyboard.current.qKey.isPressed && stateInfo.IsName("Skill_1") == false)
+        {
+            playerEffect.Play(1);
             animator.Play("Skill_1");
-        else if (Keyboard.current.eKey.isPressed)
+        }
+        else if (Keyboard.current.eKey.isPressed && stateInfo.IsName("Skill_2") == false)
+        {
+            playerEffect.Play(2);
             animator.Play("Skill_2");
-        else if (Keyboard.current.rKey.isPressed)
+        }
+        else if (Keyboard.current.xKey.isPressed && stateInfo.IsName("Skill_3") == false)
+        {
+            playerEffect.Play(3);
             animator.Play("Skill_3");
+        }
     }
 
     void HandleMovement()
