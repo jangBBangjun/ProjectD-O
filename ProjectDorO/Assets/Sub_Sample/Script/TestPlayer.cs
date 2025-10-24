@@ -25,6 +25,8 @@ public class TestPlayer : MonoBehaviour
 
     private AiMove ai;
 
+    [SerializeField] private float[] effectDelays = new float[4];
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -48,22 +50,22 @@ public class TestPlayer : MonoBehaviour
 
         if (Mouse.current.leftButton.isPressed && stateInfo.IsName("Attack") == false)
         {
-            playerEffect.Play(0);
+            playerEffect.Play(0, effectDelays[0]);
             animator.Play("Attack");
         }
         else if (Keyboard.current.qKey.isPressed && stateInfo.IsName("Skill_1") == false)
         {
-            playerEffect.Play(1);
+            playerEffect.Play(1, effectDelays[1]);
             animator.Play("Skill_1");
         }
         else if (Keyboard.current.eKey.isPressed && stateInfo.IsName("Skill_2") == false)
         {
-            playerEffect.Play(2);
+            playerEffect.Play(2, effectDelays[2]);
             animator.Play("Skill_2");
         }
         else if (Keyboard.current.xKey.isPressed && stateInfo.IsName("Skill_3") == false)
         {
-            playerEffect.Play(3);
+            playerEffect.Play(3, effectDelays[3]);
             animator.Play("Skill_3");
         }
     }

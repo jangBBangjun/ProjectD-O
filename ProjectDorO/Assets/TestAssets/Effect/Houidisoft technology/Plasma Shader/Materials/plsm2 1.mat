@@ -105,8 +105,8 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BoarderStrtenght: 2.86
-    - _Boarder_Size: 2.7
-    - _Boarder_Strength: 1.9
+    - _Boarder_Size: 1
+    - _Boarder_Strength: 3
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -143,8 +143,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BoarderColor: {r: 2.9960787, g: 0, b: 0.029652888, a: 1}
-    - _Boarder_Color: {r: 3.4666667, g: 0.03328464, b: 0, a: 1}
-    - _Color: {r: 0.69803923, g: 0.020716649, b: 0, a: 1}
+    - _Boarder_Color: {r: 0.597508, g: 0.03368932, b: 0, a: 1}
+    - _Color: {r: 0.8156863, g: 0.03226795, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
