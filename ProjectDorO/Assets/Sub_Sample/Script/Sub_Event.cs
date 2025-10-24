@@ -12,6 +12,7 @@ public class Sub_Event : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     private bool isRunning = false;
 
+    [SerializeField] private bool fireBall = false;
     public void Update()
     {
         switch (type)
@@ -43,8 +44,11 @@ public class Sub_Event : MonoBehaviour
         spawnObject.transform.position = spawnPoint.position;
         spawnObject.transform.rotation = spawnPoint.rotation;
 
-        spawnObject.GetComponent<ParticleSystem>()?.Play();
+        if(fireBall == false)
+            spawnObject.GetComponent<ParticleSystem>()?.Play();
+        else
+            spawnObject.GetComponent<Sub_FireBall>()?.Play();
 
-        isRunning = false;
+            isRunning = false;
     }
 }
