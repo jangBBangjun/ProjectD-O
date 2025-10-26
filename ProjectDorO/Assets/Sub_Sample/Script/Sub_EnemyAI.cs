@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class Sub_EnemyAI : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Sub_EnemyAI : MonoBehaviour
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private int health = 100;
+
+    [SerializeField] private Material material;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -28,6 +31,11 @@ public class Sub_EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current.zKey.isPressed)
+        {
+            material.color = Color.red;
+            Invoke("BackColor", 0.5f);
+        }
         if(stoped == false)
             agent.enabled =true;
         else
@@ -84,6 +92,10 @@ public class Sub_EnemyAI : MonoBehaviour
         animator.SetTrigger("attack");
     }
 
+    private void BackColor()
+    {
+        material.color = Color.white;
+    }
     public void TakeDamage(int damage)
     {
         if (currentState == State.Die) return;
