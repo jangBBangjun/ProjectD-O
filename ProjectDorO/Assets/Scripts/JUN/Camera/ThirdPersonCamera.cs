@@ -68,4 +68,19 @@ public class ThirdPersonCamera : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
         transform.LookAt(target.position + Vector3.up * 1.5f);
     }
+    public void SetTarget(Transform _target)
+    {
+        if (target != null)
+        {
+            var prevPlayer = target.GetComponent<TestPlayer>();
+            if (prevPlayer != null)
+                prevPlayer.UseAI();
+        }
+
+        target = _target;
+
+        var newPlayer = target.GetComponent<TestPlayer>();
+        if (newPlayer != null)
+            newPlayer.StopAI();
+    }
 }
