@@ -21,14 +21,18 @@ public class TestPlayer : MonoBehaviour
     private bool isGrounded;
 
     private Animator animator;
+    private Sub_EffectPlayer playerEffect;
 
     private AiMove ai;
+
+    [SerializeField] private float[] effectDelays = new float[4];
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         ai = GetComponent<AiMove>();
+        playerEffect = GetComponent<Sub_EffectPlayer>();
     }
 
     private void Update()
@@ -38,18 +42,42 @@ public class TestPlayer : MonoBehaviour
             HandleMovement();
             HandleAttack();
         }
+        else
+        {
+            if (ai.GetIsMoving() == true)
+                animator.SetInteger("moveZ", 1);
+            else
+                animator.SetInteger("moveZ", 0);
+        }
     }
 
     void HandleAttack()
     {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (stateInfo.IsName("Attack") || stateInfo.IsName("Skill_1") || stateInfo.IsName("Skill_2") || stateInfo.IsName("Skill_3"))
+            return;
+
         if (Mouse.current.leftButton.isPressed)
+        {
+            playerEffect.Play(0, effectDelays[0]);
             animator.Play("Attack");
+        }
         else if (Keyboard.current.qKey.isPressed)
+        {
+            playerEffect.Play(1, effectDelays[1]);
             animator.Play("Skill_1");
+        }
         else if (Keyboard.current.eKey.isPressed)
+        {
+            playerEffect.Play(2, effectDelays[2]);
             animator.Play("Skill_2");
-        else if (Keyboard.current.rKey.isPressed)
+        }
+        else if (Keyboard.current.xKey.isPressed)
+        {
+            playerEffect.Play(3, effectDelays[3]);
             animator.Play("Skill_3");
+        }
     }
 
     void HandleMovement()
@@ -101,7 +129,7 @@ public class TestPlayer : MonoBehaviour
 
         // ✅ 점프
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && stateInfo.IsName("Jump") == false)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && (stateInfo.IsName("Standing Idle") || stateInfo.IsName("Standing Walk Forward") || stateInfo.IsName("Standing Walk Back") || stateInfo.IsName("Standing Walk Right") || stateInfo.IsName("Standing Walk Left")))
         {
             animator.SetTrigger("jump");
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
