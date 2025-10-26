@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class TestManager : MonoBehaviour
 {
-    [SerializeField] TestCam testCam;
+    [SerializeField] ThirdPersonCamera testCam;
     [SerializeField] CharacterManager characterManager;
     [SerializeField] MiniMapManager miniMapManager;
     [SerializeField] Sub_EnemyAI[] golem;

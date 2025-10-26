@@ -6141,6 +6141,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0e6d4ff6-9b49-4bff-abed-6778cd3cdf8b
     m_ActionName: 'MiniMap/AltKey[/Keyboard/leftAlt]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ee9a3cb-a18f-44e3-895c-1012004eb161
+    m_ActionName: 'Player/Ult[/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9d021989-afe8-47c8-9588-1bbeea943757
+    m_ActionName: 'PlayerControll/Move[/Keyboard/w,/Keyboard/a,/Keyboard/s,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8c7a7aeb-0f99-4323-972a-f66598295adf
+    m_ActionName: 'PlayerControll/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f613ff32-91a6-4ce5-a03b-31cdf1c05a87
+    m_ActionName: 'PlayerControll/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6b94f987-a04b-4905-bf30-d0adb23ad3f0
+    m_ActionName: 'PlayerControll/Skill1[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 72633261-bcef-4934-bb11-116cad79b4ca
+    m_ActionName: 'PlayerControll/Skill2[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e5742333-c2c0-4883-b0ce-31200ffc16fb
+    m_ActionName: 'PlayerControll/Skill_Ult[/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 598a7008-ab0f-4a69-938d-4140cbf265a0
+    m_ActionName: 'PlayerControll/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92868f49-349e-4419-81a3-a25ff1d16f92
+    m_ActionName: 'PlayerControll/Select1[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 594891df-2997-42c3-8322-7db188debf0a
+    m_ActionName: 'PlayerControll/Select2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0020c968-5818-40fb-9efc-5b0f9955c8ce
+    m_ActionName: 'PlayerControll/Select3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 57131dbd-f8c4-41c3-a5c2-d4adad0d071c
+    m_ActionName: 'PlayerControll/Select4[/Keyboard/4]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: UI
@@ -6171,7 +6219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20062d0825488849817edf1a7d6191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCam: {fileID: 1487599583}
+  testCam: {fileID: 1487599588}
   characterManager: {fileID: 1213917790}
   miniMapManager: {fileID: 1213917786}
   usePlayerNum: 0
@@ -10316,6 +10364,7 @@ GameObject:
   - component: {fileID: 1487599585}
   - component: {fileID: 1487599584}
   - component: {fileID: 1487599583}
+  - component: {fileID: 1487599588}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10330,7 +10379,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487599582}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ce7f42719bdcf4f9d0c08e9629f977, type: 3}
   m_Name: 
@@ -10462,6 +10511,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 490462319}
   m_LocalEulerAnglesHint: {x: 79.166, y: 0, z: 0}
+--- !u!114 &1487599588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487599582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b77fcd8d828d2549ad11aa1c086b80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThirdPersonCamera
+  target: {fileID: 1310980988}
+  offset: {x: 0, y: 2, z: -4}
+  sensitivity: 10
+  minYAngle: -20
+  maxYAngle: 60
+  smoothSpeed: 10
 --- !u!64 &1502269184
 MeshCollider:
   m_ObjectHideFlags: 0
