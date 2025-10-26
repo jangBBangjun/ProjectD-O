@@ -1,19 +1,21 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Sub_EnemyAI : MonoBehaviour
 {
-    public enum State { Idle, Chase, Attack, Die }
-    private State currentState;
+    private enum State { Idle, Chase, Attack, Die }
+    [SerializeField] private State currentState;
 
-    public Transform target;
-    public float chaseRange = 10f;
-    public float attackRange = 2f;
-    public float attackCooldown = 1.5f;
-    public int health = 100;
+    [SerializeField] private Transform target;
+    [SerializeField] private float chaseRange = 10f;
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private float attackCooldown = 1.5f;
+    [SerializeField] private int health = 100;
 
     private NavMeshAgent agent;
     private Animator animator;
+    private AnimatorStateInfo stateInfo;
     private float lastAttackTime;
     private bool stoped;
 
@@ -31,6 +33,7 @@ public class Sub_EnemyAI : MonoBehaviour
         else
             agent.enabled =false;
 
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0); // 0: Base Layer
         if (target != null && currentState != State.Die)
         {
             if (agent.enabled == false)
@@ -41,37 +44,44 @@ public class Sub_EnemyAI : MonoBehaviour
             switch (currentState)
             {
                 case State.Idle:
-                    animator.SetBool("isWalking", false);
-                    if (distance < chaseRange)
-                        ChangeState(State.Chase);
+                    if (stateInfo.IsName("Idle"))
+                    {
+                        if (distance <= attackRange)
+                            ChangeState(State.Attack);
+                        else if (distance < chaseRange)
+                            ChangeState(State.Chase);
+                    }
                     break;
-
                 case State.Chase:
-                    agent.SetDestination(target.position);
-                    animator.SetBool("isWalking", true);
+                    animator.SetBool("walk", true);
 
-                    if (distance <= attackRange)
-                        ChangeState(State.Attack);
-                    else if (distance > chaseRange)
+                    if (stateInfo.IsName("Walk"))
+                        agent.SetDestination(target.position);
+                    
+                    if (distance > chaseRange || distance <= attackRange)
                         ChangeState(State.Idle);
                     break;
-
                 case State.Attack:
-                    agent.SetDestination(transform.position); // 멈춤
-                    animator.SetBool("isWalking", false);
+                    Attack();
+                    break;
+                case State.Die:
+                    animator.SetBool("die", true);
 
-                    if (Time.time - lastAttackTime > attackCooldown)
-                    {
-                        lastAttackTime = Time.time;
-                        animator.SetTrigger("attack");
-                        // 여기에 공격 로직 추가 (예: 타겟에게 데미지 주기)
-                    }
-
-                    if (distance > attackRange)
-                        ChangeState(State.Chase);
+                    agent.isStopped = true;
+                    agent.SetDestination(transform.position);
+                    // 필요시: Destroy(gameObject, 3f);
                     break;
             }
         }
+    }
+
+    private void Attack()
+    {
+        ChangeState(State.Idle);
+        
+        agent.SetDestination(transform.position); // 멈춤
+
+        animator.SetTrigger("attack");
     }
 
     public void TakeDamage(int damage)
@@ -88,28 +98,20 @@ public class Sub_EnemyAI : MonoBehaviour
 
     private void ChangeState(State newState)
     {
-        if (currentState == newState) return;
-
         currentState = newState;
 
-        if (newState == State.Die)
-        {
-            agent.isStopped = true;
-            animator.SetBool("die",true);   
-            transform.GetComponent<NavMeshAgent>().enabled = false;
-            // 필요시: Destroy(gameObject, 3f);
-        }
+        animator.SetBool("walk", false);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name.Contains("FireSkill1"))
+        /*if (other.name.Contains("FireSkill1"))
             TakeDamage(20);
         if (other.name.Contains("FireSkill2") && other.GetComponent<ParticleSystem>()?.isPlaying == true)
-            stoped = true;
+            stoped = true;*/
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.name.Contains("skill1_area"))
+        /*if (other.name.Contains("skill1_area"))
             TakeDamage(1);
         else if (other.name.Contains("FireSkill3"))
             TakeDamage(10);
@@ -117,6 +119,6 @@ public class Sub_EnemyAI : MonoBehaviour
         if (other.name.Contains("FireSkill2") && other.GetComponent<ParticleSystem>()?.isPlaying == true)
             stoped = true;
         else
-            stoped = false;
+            stoped = false;*/
     }
 }

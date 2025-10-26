@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class TestManager : MonoBehaviour
 {
-    [SerializeField] ThirdPersonCamera testCam;
+    [SerializeField] Camera testCam;
     [SerializeField] CharacterManager characterManager;
     [SerializeField] MiniMapManager miniMapManager;
     [SerializeField] Sub_EnemyAI[] golem;
@@ -42,11 +42,6 @@ public class TestManager : MonoBehaviour
         if (player != null)
         {
             miniMapManager.SetTarget(player);
-            testCam.SetTarget(player);
-            foreach (var _golem in golem)
-            {
-                _golem.target = player;
-            }
         }
     }
 }
