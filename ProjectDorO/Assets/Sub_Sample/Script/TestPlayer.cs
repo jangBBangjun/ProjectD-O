@@ -42,38 +42,28 @@ public class TestPlayer : MonoBehaviour
             HandleMovement();
             HandleAttack();
         }
-        else
-        {
-            if (ai.GetIsMoving() == true)
-                animator.SetInteger("moveZ", 1);
-            else
-                animator.SetInteger("moveZ", 0);
-        }
     }
 
     void HandleAttack()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (stateInfo.IsName("Attack") || stateInfo.IsName("Skill_1") || stateInfo.IsName("Skill_2") || stateInfo.IsName("Skill_3"))
-            return;
-
-        if (Mouse.current.leftButton.isPressed)
+        if (Mouse.current.leftButton.isPressed && stateInfo.IsName("Attack") == false)
         {
             playerEffect.Play(0, effectDelays[0]);
             animator.Play("Attack");
         }
-        else if (Keyboard.current.qKey.isPressed)
+        else if (Keyboard.current.qKey.isPressed && stateInfo.IsName("Skill_1") == false)
         {
             playerEffect.Play(1, effectDelays[1]);
             animator.Play("Skill_1");
         }
-        else if (Keyboard.current.eKey.isPressed)
+        else if (Keyboard.current.eKey.isPressed && stateInfo.IsName("Skill_2") == false)
         {
             playerEffect.Play(2, effectDelays[2]);
             animator.Play("Skill_2");
         }
-        else if (Keyboard.current.xKey.isPressed)
+        else if (Keyboard.current.xKey.isPressed && stateInfo.IsName("Skill_3") == false)
         {
             playerEffect.Play(3, effectDelays[3]);
             animator.Play("Skill_3");
@@ -129,7 +119,7 @@ public class TestPlayer : MonoBehaviour
 
         // ✅ 점프
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && (stateInfo.IsName("Standing Idle") || stateInfo.IsName("Standing Walk Forward") || stateInfo.IsName("Standing Walk Back") || stateInfo.IsName("Standing Walk Right") || stateInfo.IsName("Standing Walk Left")))
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && stateInfo.IsName("Jump") == false)
         {
             animator.SetTrigger("jump");
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);

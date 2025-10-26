@@ -6,7 +6,6 @@ public class TestManager : MonoBehaviour
     [SerializeField] ThirdPersonCamera testCam;
     [SerializeField] CharacterManager characterManager;
     [SerializeField] MiniMapManager miniMapManager;
-    [SerializeField] Sub_EnemyAI[] golem;
 
     [SerializeField] int usePlayerNum = 0;
     private void Update()
@@ -43,10 +42,6 @@ public class TestManager : MonoBehaviour
         {
             miniMapManager.SetTarget(player);
             testCam.SetTarget(player);
-            foreach (var _golem in golem)
-            {
-                _golem.target = player;
-            }
         }
     }
 }
