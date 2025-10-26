@@ -24473,6 +24473,7 @@ GameObject:
   - component: {fileID: 3703416388421723094}
   - component: {fileID: 3278186052928913978}
   - component: {fileID: 2514232505956854973}
+  - component: {fileID: 7575756751326589350}
   m_Layer: 0
   m_Name: skill1_area
   m_TagString: Untagged
@@ -29398,6 +29399,27 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!135 &7575756751326589350
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824374001888866290}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8559678063265873705
 GameObject:
   m_ObjectHideFlags: 0
