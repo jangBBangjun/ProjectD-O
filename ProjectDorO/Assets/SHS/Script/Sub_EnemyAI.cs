@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -11,7 +10,6 @@ public class Sub_EnemyAI : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float chaseRange = 10f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private int health = 100;
 
     [SerializeField] private Material material;

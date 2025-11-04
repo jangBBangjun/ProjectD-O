@@ -82,21 +82,18 @@ public class MiniMapManager : MonoBehaviour
         UpdateFog();
     }
 
-    private IEnumerator HandleMiniMap()
-    {
-        while (true)
-        {
-            HandleZoom();
-            HandleMiniMapDrag();
-
-            yield return null;
-        }
-    }
-
     // -------------------- InputSystem으로부터 연결되는 메서드 --------------------
 
-    public void OnMousePosition(Vector2 pos) => currentMousePos = pos;
-    public void OnScroll(float delta) => scrollDelta = delta;
+    public void OnMousePosition(Vector2 pos)
+    {
+        currentMousePos = pos;
+        HandleMiniMapDrag();
+    }
+    public void OnScroll(float delta)
+    {
+        scrollDelta = delta;
+        HandleZoom();
+    }
     public void OnAltKey(bool isDown) => altPressed = isDown;
 
     public void ToggleMap()
@@ -168,7 +165,6 @@ public class MiniMapManager : MonoBehaviour
         AllRect.sizeDelta = new Vector2(1300, 1300);
 
         TargetCenter();
-        StartCoroutine(nameof(HandleMiniMap));
         StopCoroutine(nameof(UpdateTargetCenter));
     }
 
@@ -181,7 +177,6 @@ public class MiniMapManager : MonoBehaviour
         moveRect.sizeDelta = originMinimapSize;
 
         TargetCenter();
-        StopCoroutine(nameof(HandleMiniMap));
         StartCoroutine(nameof(UpdateTargetCenter));
     }
 
@@ -202,9 +197,6 @@ public class MiniMapManager : MonoBehaviour
 
         Vector2 delta = currentMousePos - moveStartMouseScreenPos;
         moveRect.anchoredPosition = moveStartMapPos + delta;
-
-        if (!Mouse.current.leftButton.isPressed)
-            isMiniMapMoving = false;
     }
 
     // -------------------- 선택 처리 --------------------
@@ -324,7 +316,7 @@ public class MiniMapManager : MonoBehaviour
                 {
                     if (t.type == IconType.Enemy || t.transform == null) continue;
 
-                    float distSqr = (t.transform.position - target.transform.position).sqrMagnitude;
+                    float distSqr = (t.transform.position -  target.transform.position).sqrMagnitude;
                     if (distSqr <= revealRadius * revealRadius)
                     {
                         isVisible = true;

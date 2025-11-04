@@ -98,7 +98,7 @@ public class CharacterManager : MonoBehaviour
     private bool GroundRayCast(Vector3 position)
     {
         RaycastHit hit;
-        if (Physics.Raycast(position + Vector3.up * 5f, Vector3.down, out hit, 10f))
+        if (Physics.Raycast(position + Vector3.up * 1f, Vector3.down, out hit, 5f))
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
