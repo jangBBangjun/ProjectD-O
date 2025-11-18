@@ -8,13 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Point
-  m_Shader: {fileID: -6465566751694194690, guid: b3f6d0101ba84bf41bb154da4199c2d9,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 62a7e85949952b94a85047c4d7f4a7dc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _EMISSION
+  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -27,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Base_Tex:
-        m_Texture: {fileID: 2800000, guid: 8036a58f994b65348a032f6765d94c10, type: 3}
+        m_Texture: {fileID: 2800000, guid: e3576de046292e64db7dda7c08b91a9e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

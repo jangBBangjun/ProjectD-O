@@ -21,8 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_magic_rune
-  m_Shader: {fileID: -6465566751694194690, guid: b3f6d0101ba84bf41bb154da4199c2d9,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 62a7e85949952b94a85047c4d7f4a7dc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -43,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Tex:
-        m_Texture: {fileID: 2800000, guid: ff20a8a9aa0f8f54cba86e702a57ab35, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f83e664b3aa8564ea76f742ffb2caca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

@@ -15,6 +15,7 @@ public class MiniMapManager : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private RectTransform AllRect;
     [SerializeField] private RectTransform moveRect;
+    [SerializeField] private GameObject playerGrid;
 
     [Header("아이콘")]
     [SerializeField] private Transform iconParent;
@@ -164,6 +165,8 @@ public class MiniMapManager : MonoBehaviour
         AllRect.anchoredPosition = Vector2.zero;
         AllRect.sizeDelta = new Vector2(1300, 1300);
 
+        playerGrid.SetActive(true);
+
         TargetCenter();
         StopCoroutine(nameof(UpdateTargetCenter));
     }
@@ -175,6 +178,8 @@ public class MiniMapManager : MonoBehaviour
         AllRect.anchoredPosition = new Vector2(150, -150);
         AllRect.sizeDelta = new Vector2(300, 300);
         moveRect.sizeDelta = originMinimapSize;
+
+        playerGrid.SetActive(false);
 
         TargetCenter();
         StartCoroutine(nameof(UpdateTargetCenter));

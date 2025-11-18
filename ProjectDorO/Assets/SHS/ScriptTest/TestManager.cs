@@ -13,7 +13,7 @@ public class TestManager : MonoBehaviour
         }
         else if (Keyboard.current.digit2Key.isPressed)
         {
-            entityManager.PlayerSeclect(0);
+            entityManager.PlayerSeclect(1);
         }
         else if (Keyboard.current.digit3Key.isPressed)
         {

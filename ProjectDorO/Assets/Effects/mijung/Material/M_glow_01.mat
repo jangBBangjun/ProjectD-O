@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_glow_01
-  m_Shader: {fileID: -6465566751694194690, guid: b3f6d0101ba84bf41bb154da4199c2d9,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 62a7e85949952b94a85047c4d7f4a7dc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Tex:
-        m_Texture: {fileID: 2800000, guid: e184419af69776e4383fc7cb64ff0095, type: 3}
+        m_Texture: {fileID: 2800000, guid: 65c84cbcfa63d5f4f9349321b07b9271, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
