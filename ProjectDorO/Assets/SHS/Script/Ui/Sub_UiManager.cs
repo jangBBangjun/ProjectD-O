@@ -21,11 +21,9 @@ public class Sub_UiManager : MonoBehaviour
     [SerializeField] private SelectImage[] skillImages;
 
     [Header("HP/MP Bar")]
-    [SerializeField] private Sub_FollowUI hpMpPanel;
+    [SerializeField] private Sub_WorldHpPool worldHpPool;
     [SerializeField] private Sub_AnimBar mainHpBar;
-    [SerializeField] private Sub_AnimBar mainMpBar;
     [SerializeField] private Sub_AnimBar[] playerHpBars = new Sub_AnimBar[5];
-    [SerializeField] private Sub_AnimBar[] playerMpBars = new Sub_AnimBar[5];
 
     public void SetSelectPlayer(int index)
     {
@@ -43,10 +41,7 @@ public class Sub_UiManager : MonoBehaviour
             }
         }
 
-        if(hpMpPanel.gameObject.activeSelf == false)
-            hpMpPanel.gameObject.SetActive(true);
-
-        hpMpPanel.SetTarget(index);
+        worldHpPool.SetTarget(index);
     }
 
     public void SetSkill(int index, float cooltime, float maxCoolTime)
@@ -72,13 +67,5 @@ public class Sub_UiManager : MonoBehaviour
     public void SetHpBar(int index, int changeHp)
     {
         playerHpBars[index].SetBar(changeHp);
-    }
-    public void SetMpBar(int changeMp)
-    {
-        mainMpBar.SetBar(changeMp);
-    }
-    public void SetMpBar(int index, int changeMp)
-    {
-        playerMpBars[index].SetBar(changeMp);
     }
 }

@@ -14,13 +14,15 @@ public class Sub_AnimBar : MonoBehaviour
 
     public void Awake()
     {
-        animImage = transform.GetChild(0).GetComponent<Image>();
-        valueImage = transform.GetChild(1).GetComponent<Image>();
+        animImage = transform.GetChild(1).GetComponent<Image>();
+        valueImage = transform.GetChild(2).GetComponent<Image>();
     }
     public void SetBar(int changeHp)
     {
         StartCoroutine(ValueBar(changeHp));
         StartCoroutine(AnimBar(changeHp));
+
+        Debug.Log("SetBar!");
     }
 
     private IEnumerator ValueBar(int changeValue)
