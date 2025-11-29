@@ -1,19 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class Sub_WorldHpPool : MonoBehaviour
+public class Sub_WorldHp : MonoBehaviour
 {
+    [Serializable]
+    private class PlayerInfo
+    {
+        public Rigidbody rigid;
+        public Vector3 offset = new Vector3(0, 2.0f, 0);
+    }
+
     [Header("기본 설정")]
     [SerializeField] private Camera worldCamera;
     [SerializeField] private Canvas canvas;
 
     [Header("선택된 플레이어")]
-    [SerializeField] private Rigidbody targetPlayer;
+    [SerializeField] private PlayerInfo targetPlayer;
     [SerializeField] private RectTransform mainBarPanel;
-    [SerializeField] private Vector3 mainOffset = new Vector3(0, 2.0f, 0);
-    [SerializeField] private Rigidbody[] players = new Rigidbody[5];
+    [SerializeField] private PlayerInfo[] players = new PlayerInfo[5];
 
     [Header("UI 이동 설정")]
-    [SerializeField] private float lerpSpeed = 10f; // 🔧 부드럽게 따라오는 속도 (사용자 조정 가능)
+    [SerializeField] private float lerpSpeed = 10f;
 
     private Vector2 currentUIPosition;
 
@@ -25,7 +32,10 @@ public class Sub_WorldHpPool : MonoBehaviour
 
     private void Update()
     {
-        UpdateUIPosition(targetPlayer, mainOffset);
+        if (targetPlayer.rigid == null)
+            return;
+
+        UpdateUIPosition(targetPlayer);
     }
 
     public void SetTarget(int index)
@@ -37,12 +47,12 @@ public class Sub_WorldHpPool : MonoBehaviour
         mainBarPanel.gameObject.SetActive(true);
     }
 
-    private void UpdateUIPosition(Rigidbody target, Vector3 offset)
+    private void UpdateUIPosition(PlayerInfo target)
     {
-        if (target == null || worldCamera == null || mainBarPanel == null)
+        if (worldCamera == null || mainBarPanel == null)
             return;
 
-        Vector3 worldPos = target.position + offset;
+        Vector3 worldPos = target.rigid.position + target.offset;
         Vector3 screenPos = worldCamera.WorldToScreenPoint(worldPos);
 
         if (screenPos.z < 0.01f)

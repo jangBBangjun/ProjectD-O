@@ -17,18 +17,18 @@ public class Sub_AnimBar : MonoBehaviour
         animImage = transform.GetChild(1).GetComponent<Image>();
         valueImage = transform.GetChild(2).GetComponent<Image>();
     }
-    public void SetBar(int changeHp)
+    public void SetBar(int value, int maxValue)
     {
-        StartCoroutine(ValueBar(changeHp));
-        StartCoroutine(AnimBar(changeHp));
-
-        Debug.Log("SetBar!");
+        StartCoroutine(ValueBar(value, maxValue));
+        StartCoroutine(AnimBar(value, maxValue));
     }
 
-    private IEnumerator ValueBar(int changeValue)
+    private IEnumerator ValueBar(int value, int maxValue)
     {
         float startFill = valueImage.fillAmount;
-        float targetFill = Mathf.Clamp01(startFill - (changeValue / 100f));
+        float targetFill = Mathf.Clamp01(startFill - ((float)value / maxValue));
+        if ((float)value / maxValue <= 0)
+            targetFill = 0;
 
         float timer = 0f;
 
@@ -41,12 +41,14 @@ public class Sub_AnimBar : MonoBehaviour
         valueImage.fillAmount = targetFill;
     }
 
-    private IEnumerator AnimBar(int changeValue)
+    private IEnumerator AnimBar(int value, int maxValue)
     {
         yield return new WaitForSeconds(changeBarDelay);
 
         float startFill = animImage.fillAmount;
-        float targetFill = Mathf.Clamp01(startFill - (changeValue / 100f));
+        float targetFill = Mathf.Clamp01(startFill - ((float)value / maxValue));
+        if ((float)value / maxValue <= 0)
+            targetFill = 0;
 
         float timer = 0f;
 

@@ -21,7 +21,7 @@ public class Sub_UiManager : MonoBehaviour
     [SerializeField] private SelectImage[] skillImages;
 
     [Header("HP/MP Bar")]
-    [SerializeField] private Sub_WorldHpPool worldHpPool;
+    [SerializeField] private Sub_WorldHp worldHp;
     [SerializeField] private Sub_AnimBar mainHpBar;
     [SerializeField] private Sub_AnimBar[] playerHpBars = new Sub_AnimBar[5];
 
@@ -41,7 +41,7 @@ public class Sub_UiManager : MonoBehaviour
             }
         }
 
-        worldHpPool.SetTarget(index);
+        worldHp.SetTarget(index);
     }
 
     public void SetSkill(int index, float cooltime, float maxCoolTime)
@@ -60,12 +60,12 @@ public class Sub_UiManager : MonoBehaviour
             skillImages[index].LayOutImage.gameObject.SetActive(false);
         }
     }
-    public void SetHpBar(int changeHp)
+    public void SetHpBar(int hp, int maxHp)
     {
-        mainHpBar.SetBar(changeHp);
+        mainHpBar.SetBar(hp, maxHp);
     }
-    public void SetHpBar(int index, int changeHp)
+    public void SetHpBar(int index, int hp, int maxHp)
     {
-        playerHpBars[index].SetBar(changeHp);
+        playerHpBars[index].SetBar(hp, maxHp);
     }
 }

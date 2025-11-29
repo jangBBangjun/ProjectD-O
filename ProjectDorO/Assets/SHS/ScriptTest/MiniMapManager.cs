@@ -152,7 +152,7 @@ public class MiniMapManager : MonoBehaviour
         foreach (var target in selectedTargets)
         {
             if (target.type != IconType.Enemy)
-                target.transform.GetComponent<AiMove>()?.Move(FogCoordToWorld(localPoint));
+                target.rigid.GetComponent<AiMove>()?.Move(FogCoordToWorld(localPoint));
         }
     }
 
@@ -288,7 +288,7 @@ public class MiniMapManager : MonoBehaviour
     {
         foreach (var target in targets)
         {
-            if (target.transform == null) continue;
+            if (target.rigid == null) continue;
 
             // 아이콘이 없으면 생성
             if (target.rectTransform == null)
@@ -319,9 +319,9 @@ public class MiniMapManager : MonoBehaviour
                 // 플레이어나 유닛이 적 근처에 있으면 true
                 foreach (var t in targets)
                 {
-                    if (t.type == IconType.Enemy || t.transform == null) continue;
+                    if (t.type == IconType.Enemy || t.rigid == null) continue;
 
-                    float distSqr = (t.transform.position -  target.transform.position).sqrMagnitude;
+                    float distSqr = (t.rigid.position -  target.rigid.position).sqrMagnitude;
                     if (distSqr <= revealRadius * revealRadius)
                     {
                         isVisible = true;
@@ -333,7 +333,7 @@ public class MiniMapManager : MonoBehaviour
             }
 
             // 아이콘 위치 갱신
-            Vector3 pos = target.transform.position;
+            Vector3 pos = target.rigid.position;
 
             float xNorm = Mathf.InverseLerp(worldCenter.x - worldSize.x / 2, worldCenter.x + worldSize.x / 2, pos.x);
             float yNorm = Mathf.InverseLerp(worldCenter.y - worldSize.y / 2, worldCenter.y + worldSize.y / 2, pos.z);
@@ -363,7 +363,7 @@ public class MiniMapManager : MonoBehaviour
         foreach (var target in targets)
         {
             if (target.type != IconType.Enemy)
-                RenderFog(WorldToFogCoord(target.transform.position));
+                RenderFog(WorldToFogCoord(target.rigid.position));
         }
 
         FogTextureUpdate();
@@ -545,21 +545,21 @@ public class MiniMapManager : MonoBehaviour
     private class Target
     {
         public IconType type;
-        public Transform transform;
+        public Rigidbody rigid;
         public Image image;
         public RectTransform rectTransform;
 
-        public Target(IconType type, Transform transform)
+        public Target(IconType type, Rigidbody rigid)
         {
             this.type = type;
-            this.transform = transform;
+            this.rigid = rigid;
         }
     }
 
-    public void AddTarget(IconType type, Transform targetTransform)
+    public void AddTarget(IconType type, Rigidbody rigid)
     {
-        if (targets.Exists(t => t.transform == targetTransform)) return;
-        targets.Add(new Target(type, targetTransform));
+        if (targets.Exists(t => t.rigid == rigid)) return;
+        targets.Add(new Target(type, rigid));
     }
 
     // -------------------- 기즈모 --------------------

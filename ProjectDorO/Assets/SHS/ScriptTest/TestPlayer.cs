@@ -84,24 +84,24 @@ public class TestPlayer : MonoBehaviour
         hp -= testHitedDamage;
         if (hp < 0)
             hp = 0;
-        entityManager.PlayerChangeHp(index, testHitedDamage);
+        entityManager.PlayerHpRender(index, hp, maxHp);
     }
 
     IEnumerator SkillRender(int i)
     {
-        while (skills[i].skillCooldown >= 0)
+        skillings[i] = true;
+        skills[i].skillCooldown = skills[i].maxSkillCooldown;
+
+        while (skills[i].skillCooldown > 0)
         {
-            skillings[i] = true;
             if (skills[i].skillCooldown > 0f)
                 skills[i].skillCooldown -= Time.deltaTime;
-            else
-                skills[i].skillCooldown = 0f;
 
             entityManager.PlayerSkillRender(i, skills[i].skillCooldown, skills[i].maxSkillCooldown);
             yield return null;
         }
 
-        skills[i].skillCooldown = skills[i].maxSkillCooldown;
+        skills[i].skillCooldown = 0;
         skillings[i] = false;
         yield return null;
     }
@@ -208,6 +208,11 @@ public class TestPlayer : MonoBehaviour
 
     public void UseAI()
     {
+        StopAllCoroutines();
+        for (int i = 0; i < 3; i++)
+        {
+            entityManager.PlayerSkillRender(i, skills[i].skillCooldown, skills[i].maxSkillCooldown);
+        }
         ai.Move(ai.transform.position);
         controller.enabled = false;
         ai.enabled = true;
@@ -215,6 +220,7 @@ public class TestPlayer : MonoBehaviour
 
     public void StopAI()
     {
+        StopAllCoroutines();
         controller.enabled = true;
         ai.enabled = false;
     }

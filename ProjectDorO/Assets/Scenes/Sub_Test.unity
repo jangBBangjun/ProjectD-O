@@ -10330,15 +10330,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Sub_WorldHpPool
   worldCamera: {fileID: 363758017}
   canvas: {fileID: 997683638}
-  targetPlayer: {fileID: 0}
+  targetPlayer:
+    rigid: {fileID: 0}
+    offset: {x: 0, y: 2, z: 0}
   mainBarPanel: {fileID: 257525480}
-  mainOffset: {x: 0, y: 3, z: 0}
   players:
-  - {fileID: 1310980994}
-  - {fileID: 314044159}
-  - {fileID: 1591617471}
-  - {fileID: 135703987}
-  - {fileID: 168448446}
+  - rigid: {fileID: 1310980994}
+    offset: {x: 0, y: 2.8, z: 0}
+  - rigid: {fileID: 314044159}
+    offset: {x: 0, y: 3, z: 0}
+  - rigid: {fileID: 1591617471}
+    offset: {x: 0, y: 3.2, z: 0}
+  - rigid: {fileID: 135703987}
+    offset: {x: 0, y: 3.5, z: 0}
+  - rigid: {fileID: 168448446}
+    offset: {x: 0, y: 3, z: 0}
   lerpSpeed: 10
 --- !u!114 &997683636
 MonoBehaviour:
@@ -12832,15 +12838,7 @@ MonoBehaviour:
   maxWorldSize: 1000
   targets:
   - type: 2
-    transform: {fileID: 719135361}
-    image: {fileID: 0}
-    rectTransform: {fileID: 0}
-  - type: 2
-    transform: {fileID: 0}
-    image: {fileID: 0}
-    rectTransform: {fileID: 0}
-  - type: 2
-    transform: {fileID: 0}
+    rigid: {fileID: 0}
     image: {fileID: 0}
     rectTransform: {fileID: 0}
   selectedTargets: []
@@ -13211,7 +13209,7 @@ MonoBehaviour:
   - OriginImage: {fileID: 1598913299}
     ToggleImage: {fileID: 651767856}
     LayOutImage: {fileID: 1276098980}
-  worldHpPool: {fileID: 997683635}
+  worldHp: {fileID: 997683635}
   mainHpBar: {fileID: 1510831821}
   playerHpBars:
   - {fileID: 611410358}
@@ -20683,9 +20681,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 681102073163181702, guid: 366c7a6e43e8b0b40bcd70999937bdcc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1727262350}
-    - targetCorrespondingSourceObject: {fileID: 681102073163181702, guid: 366c7a6e43e8b0b40bcd70999937bdcc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1727262355}
   m_SourcePrefab: {fileID: 100100000, guid: 366c7a6e43e8b0b40bcd70999937bdcc, type: 3}
 --- !u!1 &1727262349 stripped
 GameObject:
@@ -20746,28 +20741,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7679878916342623310, guid: 366c7a6e43e8b0b40bcd70999937bdcc, type: 3}
   m_PrefabInstance: {fileID: 1727262348}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1727262355
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727262349}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6169928966953541961, guid: 6b65dd139f9dbca478571a11756b35e6, type: 3}
 --- !u!64 &1736207666
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -25084,6 +25057,18 @@ PrefabInstance:
       propertyPath: mainCameraTransform
       value: 
       objectReference: {fileID: 363758010}
+    - target: {fileID: 2323263167880720483, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[0].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323263167880720483, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[1].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323263167880720483, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[2].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2494977226048980542, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       propertyPath: target
       value: 
@@ -25100,6 +25085,18 @@ PrefabInstance:
       propertyPath: mainCameraTransform
       value: 
       objectReference: {fileID: 363758010}
+    - target: {fileID: 2981004962831230739, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[0].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981004962831230739, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[1].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981004962831230739, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[2].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3309301060811112491, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       propertyPath: miniMap
       value: 
@@ -25112,6 +25109,18 @@ PrefabInstance:
       propertyPath: mainCameraTransform
       value: 
       objectReference: {fileID: 363758010}
+    - target: {fileID: 3309301060811112491, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[0].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309301060811112491, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[1].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309301060811112491, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[2].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4209892896832073472, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       propertyPath: miniMap
       value: 
@@ -25124,6 +25133,18 @@ PrefabInstance:
       propertyPath: mainCameraTransform
       value: 
       objectReference: {fileID: 363758010}
+    - target: {fileID: 4209892896832073472, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[0].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209892896832073472, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[1].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209892896832073472, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[2].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4333432121736412871, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       propertyPath: m_Name
       value: = Player =
@@ -25148,6 +25169,18 @@ PrefabInstance:
       propertyPath: mainCameraTransform
       value: 
       objectReference: {fileID: 363758010}
+    - target: {fileID: 6216707867630081720, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[0].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216707867630081720, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[1].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216707867630081720, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: skills.Array.data[2].skillCooldown
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

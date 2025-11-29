@@ -44,7 +44,7 @@ public class Sub_EntityManager : MonoBehaviour
         GameObject target = playerList[playerCount].gameObject;
         target.transform.position = position;
 
-        miniMapManager.AddTarget(IconType.Player, target.transform);
+        miniMapManager.AddTarget(IconType.Player, target.GetComponent<Rigidbody>());
         target.SetActive(true);
     }
     public Transform PlayerGet(int num)
@@ -77,7 +77,7 @@ public class Sub_EntityManager : MonoBehaviour
             uiManager.SetSelectPlayer(changeNum);
         }
     }
-    public void PlayerChangeHp(int index, int value)
+    public void PlayerHpRender(int index, int hp, int maxHp)
     {
         if (index >= playerList.Count)
         {
@@ -85,10 +85,10 @@ public class Sub_EntityManager : MonoBehaviour
             return;
         }
 
-        uiManager.SetHpBar(index, value);
+        uiManager.SetHpBar(index, hp, maxHp);
 
         if (index == usePlayerNum)
-            uiManager.SetHpBar(value);
+            uiManager.SetHpBar(hp, maxHp);
     }
     public void PlayerSkillRender(int skillNum, float skillCooldown, float maxSkillCooldown)
     {
@@ -128,9 +128,9 @@ public class Sub_EntityManager : MonoBehaviour
             {
                 unit.gameObject.SetActive(true);
                 unit.gameObject.transform.position = position;
-                miniMapManager.AddTarget(IconType.Unit, unit.gameObject.transform);
+                miniMapManager.AddTarget(IconType.Unit, unit.gameObject.GetComponent<Rigidbody>());
                 return;
-            }
+            }   
         }
 
         foreach (UnitPrefab unitPrefab in unitPrefabs)
@@ -138,7 +138,7 @@ public class Sub_EntityManager : MonoBehaviour
             if (unitPrefab.unitType == unitType)
             {
                 GameObject unit = Instantiate(unitPrefab.prefab, position, Quaternion.identity, unitParent);
-                miniMapManager.AddTarget(IconType.Unit, unit.gameObject.transform);
+                miniMapManager.AddTarget(IconType.Unit, unit.GetComponent<Rigidbody>());
                 return;
             }
         }
