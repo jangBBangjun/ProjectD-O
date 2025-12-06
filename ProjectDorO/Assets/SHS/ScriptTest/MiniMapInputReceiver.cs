@@ -4,9 +4,13 @@ using UnityEngine.InputSystem;
 public class MiniMapInputReceiver : MonoBehaviour
 {
     [SerializeField] private MiniMapManager miniMapManager;
+    public bool miniMapLock = false;
 
     public void OnToggleMap(InputAction.CallbackContext context)
     {
+        if(miniMapLock)
+            return;
+
         if (context.performed)
             miniMapManager.ToggleMap();
     }
