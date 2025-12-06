@@ -29,6 +29,8 @@ public class Sub_AnimBar : MonoBehaviour
         float targetFill = Mathf.Clamp01(startFill - ((float)value / maxValue));
         if ((float)value / maxValue <= 0)
             targetFill = 0;
+        else if((float)value / maxValue >= 1)
+            targetFill = 1;
 
         float timer = 0f;
 

@@ -63,7 +63,7 @@ public class Sub_EntityManager : MonoBehaviour
         Debug.LogWarning("해당 플레이어 번호가 없습니다: " + num);
         return null;
     }
-    public void PlayerSeclect(int changeNum)
+    public bool PlayerSeclect(int changeNum)
     {
         usePlayerNum = changeNum;
 
@@ -75,7 +75,10 @@ public class Sub_EntityManager : MonoBehaviour
             miniMapManager.SetTarget(player);
             CameratestCam.SetTarget(player);
             uiManager.SetSelectPlayer(changeNum);
+
+            return true;
         }
+        return false;
     }
     public void PlayerHpRender(int index, int hp, int maxHp)
     {
