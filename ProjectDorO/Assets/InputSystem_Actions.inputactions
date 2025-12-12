@@ -1394,7 +1394,7 @@
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Select3",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1405,7 +1405,7 @@
                     "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Select4",
                     "isComposite": false,
                     "isPartOfComposite": false
