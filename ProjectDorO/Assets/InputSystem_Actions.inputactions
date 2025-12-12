@@ -1242,6 +1242,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Select5",
+                    "type": "Button",
+                    "id": "b3bcfbb0-4b21-4e9c-b00b-2485504b0e1b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1407,6 +1416,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Select4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6afdaf6-9f91-4050-8c46-1164b2230873",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Select5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -910,6 +910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c46b4ebffa68df4da43af514a4d4b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  isMoving: 0
 --- !u!114 &135703982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,12 +924,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a667741b9adfc964ba090ed000000c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
+  entityManager: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 700
   gravity: -9.81
   jumpHeight: 1.5
   mainCameraTransform: {fileID: 1487599587}
   miniMap: {fileID: 1213917786}
+  effectDelays:
+  - 0
+  - 0
+  - 0
+  - 0
+  skills:
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  skillings: 000000
+  hp: 100
+  maxHp: 100
+  testHitedDamage: 10
 --- !u!143 &135703983
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2124,6 +2144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c46b4ebffa68df4da43af514a4d4b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  isMoving: 0
 --- !u!114 &314044155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2136,12 +2158,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a667741b9adfc964ba090ed000000c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
+  entityManager: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 700
   gravity: -9.81
   jumpHeight: 1.5
   mainCameraTransform: {fileID: 1487599587}
   miniMap: {fileID: 1213917786}
+  effectDelays:
+  - 0
+  - 0
+  - 0
+  - 0
+  skills:
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  skillings: 000000
+  hp: 100
+  maxHp: 100
+  testHitedDamage: 10
 --- !u!143 &314044156
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2816,6 +2856,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7649191086391077180, guid: 6d51d69e604a1ed48a53a20b2e677ea9, type: 3}
+--- !u!1001 &466325427
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.78244
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.35984
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467292396697752019, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      propertyPath: m_Name
+      value: character_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
 --- !u!64 &466939130
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5917,6 +6014,7 @@ MonoBehaviour:
   canvas: {fileID: 1013214662}
   AllRect: {fileID: 427132809}
   moveRect: {fileID: 2118094350}
+  playerGrid: {fileID: 0}
   iconParent: {fileID: 1285804033}
   iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   iconSize: 20
@@ -5940,7 +6038,7 @@ MonoBehaviour:
   maxWorldSize: 1000
   targets:
   - type: 2
-    transform: {fileID: 719135361}
+    rigid: {fileID: 0}
     image: {fileID: 0}
     rectTransform: {fileID: 0}
   selectedTargets: []
@@ -6207,6 +6305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniMapInputReceiver
   miniMapManager: {fileID: 1213917786}
+  miniMapLock: 0
 --- !u!114 &1213917789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6219,10 +6318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20062d0825488849817edf1a7d6191c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCam: {fileID: 1487599588}
-  characterManager: {fileID: 1213917790}
-  miniMapManager: {fileID: 1213917786}
-  usePlayerNum: 0
+  entityManager: {fileID: 0}
 --- !u!114 &1213917790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6235,16 +6331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8f88eb33689e64094d62be7982acca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniMapManager: {fileID: 1213917786}
-  unitPrefabs:
-  - unitType: 1
-    prefab: {fileID: 6679450339283544555, guid: 61fc22b19375560468bc51df5c0b1ae2, type: 3}
-  - unitType: 2
-    prefab: {fileID: 3847608121729441621, guid: d58b47dd39c66fd43b87401340bdd302, type: 3}
-  - unitType: 3
-    prefab: {fileID: 9106669713750335642, guid: 6dbf6b8598b25c6458b2b1ebd06c4335, type: 3}
-  unitParent: {fileID: 1046356461}
-  unitList: []
+  CameratestCam: {fileID: 0}
+  usePlayerNum: 0
   playerList:
   - playerCode: 1
     gameObject: {fileID: 1310980987}
@@ -6254,6 +6342,15 @@ MonoBehaviour:
     gameObject: {fileID: 1591617464}
   - playerCode: 3
     gameObject: {fileID: 135703980}
+  unitPrefabs:
+  - unitType: 1
+    prefab: {fileID: 6679450339283544555, guid: 61fc22b19375560468bc51df5c0b1ae2, type: 3}
+  - unitType: 2
+    prefab: {fileID: 3847608121729441621, guid: d58b47dd39c66fd43b87401340bdd302, type: 3}
+  - unitType: 3
+    prefab: {fileID: 9106669713750335642, guid: 6dbf6b8598b25c6458b2b1ebd06c4335, type: 3}
+  unitParent: {fileID: 1046356461}
+  unitList: []
 --- !u!4 &1213917791
 Transform:
   m_ObjectHideFlags: 0
@@ -9570,6 +9667,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c46b4ebffa68df4da43af514a4d4b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  isMoving: 0
 --- !u!114 &1310980990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9582,12 +9681,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a667741b9adfc964ba090ed000000c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
+  entityManager: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 700
   gravity: -9.81
   jumpHeight: 1.5
   mainCameraTransform: {fileID: 1487599587}
   miniMap: {fileID: 1213917786}
+  effectDelays:
+  - 0
+  - 0
+  - 0
+  - 0
+  skills:
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  skillings: 000000
+  hp: 100
+  maxHp: 100
+  testHitedDamage: 10
 --- !u!143 &1310980991
 CharacterController:
   m_ObjectHideFlags: 0
@@ -11079,6 +11196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c46b4ebffa68df4da43af514a4d4b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  isMoving: 0
 --- !u!114 &1591617467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11091,12 +11210,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a667741b9adfc964ba090ed000000c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
+  entityManager: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 700
   gravity: -9.81
   jumpHeight: 1.5
   mainCameraTransform: {fileID: 1487599587}
   miniMap: {fileID: 1213917786}
+  effectDelays:
+  - 0
+  - 0
+  - 0
+  - 0
+  skills:
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  - skillCooldown: 0
+    maxSkillCooldown: 0
+  skillings: 000000
+  hp: 100
+  maxHp: 100
+  testHitedDamage: 10
 --- !u!143 &1591617468
 CharacterController:
   m_ObjectHideFlags: 0
@@ -13163,3 +13300,4 @@ SceneRoots:
   - {fileID: 269577639}
   - {fileID: 1013214663}
   - {fileID: 195101772}
+  - {fileID: 466325427}
