@@ -6,6 +6,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [Header("Target Settings")]
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset = new Vector3(0, 2, -4);
+    [SerializeField] private float lookAtHeight = 1.5f;
 
     [Header("Camera Settings")]
     [SerializeField] private float sensitivity = 2f;
@@ -18,25 +19,26 @@ public class ThirdPersonCamera : MonoBehaviour
     private float yaw;
     private float pitch;
 
-    public float CurrentYaw => yaw;   // 다른 스크립트에서 접근할 수 있도록 (읽기 전용)
+    public float CurrentYaw => yaw;
     public float CurrentPitch => pitch;
 
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
     }
+
     private void OnEnable()
     {
-        inputActions.Player.Look.Enable();
-        inputActions.Player.Look.performed += OnLook;
-        inputActions.Player.Look.canceled += OnLook;
+        inputActions.PlayerControll.Look.Enable();
+        inputActions.PlayerControll.Look.performed += OnLook;
+        inputActions.PlayerControll.Look.canceled += OnLook;
     }
 
     private void OnDisable()
     {
-        inputActions.Player.Look.performed -= OnLook;
-        inputActions.Player.Look.canceled -= OnLook;
-        inputActions.Player.Look.Disable();
+        inputActions.PlayerControll.Look.performed -= OnLook;
+        inputActions.PlayerControll.Look.canceled -= OnLook;
+        inputActions.PlayerControll.Look.Disable();
     }
 
     private void Start()
@@ -56,31 +58,30 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        // 회전 계산
+        if (target == null)
+            return;
+
         yaw += lookInput.x * sensitivity * Time.deltaTime;
         pitch -= lookInput.y * sensitivity * Time.deltaTime;
         pitch = Mathf.Clamp(pitch, minYAngle, maxYAngle);
 
-        // 카메라 위치 및 회전
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
         Vector3 desiredPosition = target.position + rotation * offset;
 
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
-        transform.LookAt(target.position + Vector3.up * 1.5f);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            desiredPosition,
+            smoothSpeed * Time.deltaTime
+        );
+
+        transform.LookAt(target.position + Vector3.up * lookAtHeight);
     }
-    public void SetTarget(Transform _target)
+
+    public void SetTarget(Transform newTarget)
     {
-        if (target != null)
-        {
-            var prevPlayer = target.GetComponent<TestPlayer>();
-            if (prevPlayer != null)
-                prevPlayer.UseAI();
-        }
+        if (newTarget == null)
+            return;
 
-        target = _target;
-
-        var newPlayer = target.GetComponent<TestPlayer>();
-        if (newPlayer != null)
-            newPlayer.StopAI();
+        target = newTarget;
     }
 }
