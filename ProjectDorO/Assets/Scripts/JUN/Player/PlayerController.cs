@@ -10,69 +10,118 @@ public class PlayerController : MonoBehaviour
     public BaseAttackController skill1Controller;
     public BaseAttackController skill2Controller;
     public BaseAttackController skill3Controller;
+    public ThirdPersonCamera cameraController;
 
     [Header("Movement")]
     public float speed = 5f;
     public float rotationSpeed = 10f;
 
+    [Header("Jump")]
+    public float jumpForce = 5f;
+    public float gravity = -20f;
+
+    private float verticalVelocity;
+    private bool isGrounded;
+
+    [Header("Jump Assist")]
+    [SerializeField] float jumpBufferTime = 0.15f;
+    [SerializeField] float coyoteTime = 0.1f;
+
+    float jumpBufferCounter;
+    float coyoteCounter;
+
+    private ICharacterCombat combat;
     private Vector3 velocity;
 
+    private void Awake()
+    {
+        combat = GetComponent<ICharacterCombat>();
+    }
     private void Update()
     {
-        HandleMovement();
-        HandleLook();
+        if (!enabled) return;
+
+        HandleRotation();
+        HandleMovementAndJump();
         HandleActions();
+
     }
-
-    private void HandleMovement()
+    private void HandleMovementAndJump()
     {
-        Vector2 move = input.Move;
-        Vector3 direction = new Vector3(move.x, 0, move.y);
-
-        if (direction.sqrMagnitude > 0.01f)
+        // Ground 상태 갱신
+        if (controller.isGrounded)
         {
-            // 카메라 기준으로 방향 변환
-            Vector3 camForward = cameraTransform.forward;
-            camForward.y = 0;
-            camForward.Normalize();
+            coyoteCounter = coyoteTime;
 
-            Vector3 camRight = cameraTransform.right;
-            camRight.y = 0;
-            camRight.Normalize();
-
-            Vector3 moveDir = camForward * direction.z + camRight * direction.x;
-
-            // 이동
-            controller.Move(moveDir * speed * Time.deltaTime);
-
-            // 캐릭터 방향 회전
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
-            transform.rotation = Quaternion.Lerp(
-                transform.rotation,
-                targetRotation,
-                rotationSpeed * Time.deltaTime
-            );
+            if (verticalVelocity < 0)
+                verticalVelocity = -2f;
         }
+        else
+        {
+            coyoteCounter -= Time.deltaTime;
+        }
+
+        // 점프 입력 버퍼
+        if (input.JumpTriggered)
+        {
+            jumpBufferCounter = jumpBufferTime;
+            input.ConsumeJump();
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        // 점프 판정
+        if (jumpBufferCounter > 0f && coyoteCounter > 0f)
+        {
+            verticalVelocity = Mathf.Sqrt(jumpForce * -2f * gravity);
+            jumpBufferCounter = 0f;
+            coyoteCounter = 0f;
+        }
+
+        // 중력
+        verticalVelocity += gravity * Time.deltaTime;
+
+        // 이동
+        Vector2 moveInput = input.Move;
+        Quaternion yawRotation = Quaternion.Euler(0, cameraController.CurrentYaw, 0);
+        Vector3 moveDir = yawRotation * new Vector3(moveInput.x, 0, moveInput.y);
+
+        Vector3 finalMove =
+            moveDir * speed +
+            Vector3.up * verticalVelocity;
+
+        controller.Move(finalMove * Time.deltaTime);
     }
 
-    private void HandleLook()
+    private void HandleRotation()
     {
-        // 카메라 컨트롤러에서 처리할 수도 있음
-        // 지금은 Character 회전과 분리해둠
+        float yaw = cameraController.CurrentYaw;
+
+        Quaternion targetRotation = Quaternion.Euler(0, yaw, 0);
+
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
+
 
     private void HandleActions()
     {
         if (input.AttackTriggered)
-            attackController?.Attack();
+            combat?.BasicAttack();
 
         if (input.Skill1Triggered)
-            skill1Controller?.Attack();
+            combat?.Skill1();
 
         if (input.Skill2Triggered)
-            skill2Controller?.Attack();
+            combat?.Skill2();
 
         if (input.Skill3Triggered)
-            skill3Controller?.Attack();
+            combat?.Ultimate();
     }
+
 }

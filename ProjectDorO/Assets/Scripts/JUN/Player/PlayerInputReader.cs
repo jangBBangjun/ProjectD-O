@@ -15,6 +15,7 @@ public class PlayerInputReader : MonoBehaviour
     public bool Select3 { get; private set; }
     public bool Select4 { get; private set; }
     public bool Select5 { get; private set; }
+    public bool JumpTriggered { get; private set; }
 
     private InputSystem_Actions inputActions;
 
@@ -43,6 +44,8 @@ public class PlayerInputReader : MonoBehaviour
         inputActions.PlayerControll.Select3.performed += _ => Select3 = true;
         inputActions.PlayerControll.Select4.performed += _ => Select4 = true;
         inputActions.PlayerControll.Select5.performed += _ => Select5 = true;
+
+        inputActions.PlayerControll.Jump.performed += _ => JumpTriggered = true;
     }
 
     private void LateUpdate()
@@ -58,8 +61,12 @@ public class PlayerInputReader : MonoBehaviour
         Select3 = false;
         Select4 = false;
         Select5 = false;
-    }
 
+    }
+    public void ConsumeJump()
+    {
+        JumpTriggered = false;
+    }
     private void OnDisable()
     {
         inputActions.Disable();

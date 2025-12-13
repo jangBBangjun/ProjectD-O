@@ -2,23 +2,22 @@ using UnityEngine;
 
 public class CharacterControlRoot : MonoBehaviour
 {
-    public PlayerController playerController;
-    public BaseAttackController attackController;
+    [SerializeField] private PlayerController playerController;
+
+    private void Awake()
+    {
+        // 기본 상태는 조작 불가
+        playerController.enabled = false;
+    }
 
     public void EnableControl(PlayerInputReader input)
     {
         playerController.enabled = true;
         playerController.input = input;
-
-        if (attackController != null)
-            attackController.enabled = true;
     }
 
     public void DisableControl()
     {
         playerController.enabled = false;
-
-        if (attackController != null)
-            attackController.enabled = false;
     }
 }
