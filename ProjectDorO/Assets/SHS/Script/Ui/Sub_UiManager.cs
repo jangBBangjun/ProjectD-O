@@ -13,12 +13,21 @@ public class Sub_UiManager : MonoBehaviour
         public Image ToggleImage;
         public Image LayOutImage = null;
     }
+    [Serializable]
+    private class SkillSprites
+    {
+        public Sprite skill_1;
+        public Sprite skill_2;
+        public Sprite skill_3;
+    }
 
     [Header("Tag")]
     [SerializeField] private SelectImage[] tagImages;
 
     [Header("Skill")]
     [SerializeField] private SelectImage[] skillImages;
+    [SerializeField] private SkillSprites[] skillSprites;
+
 
     [Header("HP/MP Bar")]
     [SerializeField] private Sub_WorldHp worldHp;
@@ -27,6 +36,18 @@ public class Sub_UiManager : MonoBehaviour
 
     public void SetSelectPlayer(int index)
     {
+        skillImages[0].LayOutImage.transform.GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_1;
+        skillImages[1].LayOutImage.transform.GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_2;
+        skillImages[2].LayOutImage.transform.GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_3;
+
+        skillImages[0].OriginImage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_1;
+        skillImages[1].OriginImage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_2;
+        skillImages[2].OriginImage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_3;
+
+        skillImages[0].ToggleImage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_1;
+        skillImages[1].ToggleImage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_2;
+        skillImages[2].ToggleImage.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = skillSprites[index].skill_3;
+
         for (int i = 0; i < tagImages.Length; ++i)
         {
             if (index != i)
@@ -51,7 +72,7 @@ public class Sub_UiManager : MonoBehaviour
             skillImages[index].OriginImage.gameObject.SetActive(false);
             skillImages[index].ToggleImage.gameObject.SetActive(true);
             skillImages[index].LayOutImage.gameObject.SetActive(true);
-            skillImages[index].LayOutImage.fillAmount = cooltime / maxCoolTime;
+            skillImages[index].LayOutImage.fillAmount = 1 - (cooltime / maxCoolTime);
         }
         else
         {
