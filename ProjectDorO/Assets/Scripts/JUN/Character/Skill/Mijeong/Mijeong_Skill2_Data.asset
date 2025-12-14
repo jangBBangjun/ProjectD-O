@@ -20,7 +20,7 @@ MonoBehaviour:
   spawnOffset: {x: 0, y: 0, z: 8}
   forwardOffset: 0
   projectileSpeed: 0
-  duration: 5
+  duration: 6
   range: 0
   damage: 5
   attackType: 0

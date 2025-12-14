@@ -27,7 +27,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
         currentHP -= data.damageAmount;
         currentHP = Mathf.Max(currentHP, 0);
-
+        Debug.Log(currentHP);
         OnHealthChanged?.Invoke(currentHP, maxHP);
 
         if (currentHP <= 0)
