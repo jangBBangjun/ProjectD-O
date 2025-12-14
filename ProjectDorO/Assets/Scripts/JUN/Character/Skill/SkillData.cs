@@ -4,14 +4,16 @@ public enum SkillSpawnType
     Projectile,
     Area,
     Melee,
-    Targeting
+    Targeting,
+    Just
 }
 
 [CreateAssetMenu(menuName = "Skill/Skill Data")]
 public class SkillData : ScriptableObject
 {
-    [Header("Basic")]
-    public float cooldown = 1f;
+    [Header("Casting")]
+    public bool useCasting;
+    public GameObject castingEffectPrefab;
 
     [Header("Visual")]
     public AnimationClip animation;
@@ -34,4 +36,7 @@ public class SkillData : ScriptableObject
     [Header("Damage")]
     public int damage;
     public AttackType attackType;
+
+    [Header("Cooldown")]
+    public float cooldown;
 }

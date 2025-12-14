@@ -15,7 +15,7 @@ public abstract class BaseSkill : MonoBehaviour, ISkill
     {
         return Time.time >= lastUsedTime + data.cooldown;
     }
-
+    protected abstract void SpawnEffect();
     public void Execute()
     {
         if (!CanExecute())

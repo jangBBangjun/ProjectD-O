@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73f081b14774034fa9890506dc7ba6b, type: 3}
   m_Name: Mijeong_Skill2_Data
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillName: Skill2
-  cooldown: 1
-  animation: {fileID: 7400000, guid: 414d526ae08746444ae8ab31c94116df, type: 2}
-  effectPrefab: {fileID: 7432710629006020587, guid: 45430e782ffe30b4a9670a6969ee944c, type: 3}
-  damage: 40
+  useCasting: 1
+  castingEffectPrefab: {fileID: 7551435507096186335, guid: beabce381cce87648b94dc45206b7e10, type: 3}
+  animation: {fileID: 7400000, guid: b9ebb4ce63891aa4cbe984664cd68712, type: 2}
+  effectPrefab: {fileID: 3829298133398816677, guid: 898ff8adf6af9374e80d26d7c28f2b36, type: 3}
+  spawnType: 1
+  spawnOffset: {x: 0, y: 0, z: 8}
+  forwardOffset: 0
+  projectileSpeed: 0
+  duration: 6
+  range: 0
+  damage: 5
+  attackType: 0
+  cooldown: 10

@@ -19,6 +19,7 @@ public class Sub_FireBall : MonoBehaviour
     private void Awake()
     {
         ps = GetComponent<ParticleSystem>();
+        Play();
     }
     public void Play()
     {

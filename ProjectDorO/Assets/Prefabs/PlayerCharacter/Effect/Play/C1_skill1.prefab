@@ -50,13 +50,13 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.1
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -4915,6 +4915,7 @@ GameObject:
   - component: {fileID: 3405633915700755835}
   - component: {fileID: 8392024936719882735}
   - component: {fileID: 6724405753721453322}
+  - component: {fileID: -6897976153276735785}
   m_Layer: 6
   m_Name: C1_skill1
   m_TagString: Untagged
@@ -4955,13 +4956,13 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0.1
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -9815,7 +9816,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7551435507096186335}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bf92ce3c8895174aab89d713f8bd11e, type: 3}
   m_Name: 
@@ -9825,6 +9826,18 @@ MonoBehaviour:
   spawnObject: {fileID: 0}
   spawnPoint: {fileID: 3662356243102504465}
   fireBall: 1
+--- !u!114 &-6897976153276735785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7551435507096186335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae304fc6bd74234f93ef16975281fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CastingEffect
 --- !u!1 &7751835899526288904
 GameObject:
   m_ObjectHideFlags: 0
@@ -9877,13 +9890,13 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.1
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -14780,13 +14793,13 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 1.1
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
