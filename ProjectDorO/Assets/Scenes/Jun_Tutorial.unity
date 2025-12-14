@@ -1130,10 +1130,6 @@ MonoBehaviour:
   input: {fileID: 1213917793}
   controller: {fileID: 121622514}
   cameraTransform: {fileID: 363758010}
-  attackController: {fileID: 0}
-  skill1Controller: {fileID: 0}
-  skill2Controller: {fileID: 0}
-  skill3Controller: {fileID: 0}
   cameraController: {fileID: 363758020}
   speed: 5
   rotationSpeed: 10
@@ -1201,6 +1197,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
   maxHP: 100
+  team: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &121622517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11255,7 +11258,22 @@ PrefabInstance:
       addedObject: {fileID: 946360683}
     - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 946360696}
+    - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 946360686}
+    - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946360695}
+    - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946360694}
+    - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946360693}
+    - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946360692}
   m_SourcePrefab: {fileID: 100100000, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
 --- !u!1 &946360680 stripped
 GameObject:
@@ -11313,6 +11331,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
   maxHP: 100
+  team: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &946360686
 Animator:
   serializedVersion: 7
@@ -11350,10 +11375,6 @@ MonoBehaviour:
   input: {fileID: 1213917793}
   controller: {fileID: 946360682}
   cameraTransform: {fileID: 363758010}
-  attackController: {fileID: 0}
-  skill1Controller: {fileID: 0}
-  skill2Controller: {fileID: 0}
-  skill3Controller: {fileID: 0}
   cameraController: {fileID: 363758020}
   speed: 5
   rotationSpeed: 10
@@ -11361,6 +11382,74 @@ MonoBehaviour:
   gravity: -20
   jumpBufferTime: 0.15
   coyoteTime: 0.1
+--- !u!114 &946360692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78aa90f136c5902408b747ad1856abc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestSkill3Active
+  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
+--- !u!114 &946360693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe84499865f7cf4ba188cacf2865c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestSkill2Active
+  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
+--- !u!114 &946360694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c5c92dbc03661499725341724ff07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestSkillActive
+  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
+--- !u!114 &946360695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4675e27678442a47bffc89a2f58445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestBasicSkillActive
+  data: {fileID: 11400000, guid: a62a10febac0d3e4eb95770e6bc4e161, type: 2}
+--- !u!114 &946360696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aff2c74e5576144d8ccce5ebdd18b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterCombat
+  basic: {fileID: 946360695}
+  skill1: {fileID: 946360694}
+  skill2: {fileID: 946360693}
+  ultimate: {fileID: 946360692}
 --- !u!1 &955730769 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2190187358674555268, guid: a12f6c0a94c8a1242aa40d3858f442c8, type: 3}
@@ -13658,10 +13747,6 @@ MonoBehaviour:
   input: {fileID: 1213917793}
   controller: {fileID: 1135176655}
   cameraTransform: {fileID: 363758010}
-  attackController: {fileID: 0}
-  skill1Controller: {fileID: 0}
-  skill2Controller: {fileID: 0}
-  skill3Controller: {fileID: 0}
   cameraController: {fileID: 363758020}
   speed: 5
   rotationSpeed: 10
@@ -13729,6 +13814,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
   maxHP: 100
+  team: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1135176658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23392,6 +23484,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
   maxHP: 100
+  team: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1684168947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23407,10 +23506,6 @@ MonoBehaviour:
   input: {fileID: 1213917793}
   controller: {fileID: 1684168949}
   cameraTransform: {fileID: 363758010}
-  attackController: {fileID: 0}
-  skill1Controller: {fileID: 0}
-  skill2Controller: {fileID: 0}
-  skill3Controller: {fileID: 0}
   cameraController: {fileID: 363758020}
   speed: 5
   rotationSpeed: 10
@@ -25183,10 +25278,6 @@ MonoBehaviour:
   input: {fileID: 1213917793}
   controller: {fileID: 1828297583}
   cameraTransform: {fileID: 363758010}
-  attackController: {fileID: 0}
-  skill1Controller: {fileID: 0}
-  skill2Controller: {fileID: 0}
-  skill3Controller: {fileID: 0}
   cameraController: {fileID: 363758020}
   speed: 5
   rotationSpeed: 10
@@ -25254,6 +25345,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterHealth
   maxHP: 100
+  team: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1828297586
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29515,6 +29613,10 @@ PrefabInstance:
     - target: {fileID: 4333432121736412871, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       propertyPath: m_Name
       value: = Player =
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816185732910946109, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: gun
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5430694088550310872, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       propertyPath: target

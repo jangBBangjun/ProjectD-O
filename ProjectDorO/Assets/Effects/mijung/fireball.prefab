@@ -29109,6 +29109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478861106489481472}
+  - component: {fileID: 2375250006316590413}
   m_Layer: 0
   m_Name: fireball
   m_TagString: Untagged
@@ -29132,3 +29133,16 @@ Transform:
   - {fileID: 2217327810251421540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2375250006316590413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7432710629006020587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a7f7db9a132e342b03f43db6665cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoDestroyEffect
+  lifeTime: 2

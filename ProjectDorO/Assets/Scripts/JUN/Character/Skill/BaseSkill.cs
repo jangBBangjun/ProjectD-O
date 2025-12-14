@@ -2,17 +2,18 @@ using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour, ISkill
 {
-    [SerializeField] protected float cooldown = 1f;
+    [SerializeField] protected SkillData data;
+
     protected float lastUsedTime = -999f;
 
     public float CooldownRemaining =>
-        Mathf.Max(0, cooldown - (Time.time - lastUsedTime));
+        Mathf.Max(0, data.cooldown - (Time.time - lastUsedTime));
 
-    public float CooldownDuration => cooldown;
+    public float CooldownDuration => data.cooldown;
 
     public bool CanExecute()
     {
-        return Time.time >= lastUsedTime + cooldown;
+        return Time.time >= lastUsedTime + data.cooldown;
     }
 
     public void Execute()
