@@ -6,10 +6,6 @@ public class PlayerController : MonoBehaviour
     public PlayerInputReader input; // 인풋을 직접 읽지 않고 Reader에게 받는다
     public CharacterController controller;
     public Transform cameraTransform;
-    public BaseAttackController attackController;
-    public BaseAttackController skill1Controller;
-    public BaseAttackController skill2Controller;
-    public BaseAttackController skill3Controller;
     public ThirdPersonCamera cameraController;
 
     [Header("Movement")]
