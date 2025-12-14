@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpBufferTime = 0.15f;
     [SerializeField] float coyoteTime = 0.1f;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
     float jumpBufferCounter;
     float coyoteCounter;
 
@@ -69,11 +72,19 @@ public class PlayerController : MonoBehaviour
         }
 
         // 점프 판정
+        bool jumpedThisFrame = false;
+
         if (jumpBufferCounter > 0f && coyoteCounter > 0f)
         {
             verticalVelocity = Mathf.Sqrt(jumpForce * -2f * gravity);
             jumpBufferCounter = 0f;
             coyoteCounter = 0f;
+            jumpedThisFrame = true;
+        }
+
+        if (jumpedThisFrame)
+        {
+            animator.SetTrigger("jump");
         }
 
         // 중력
@@ -89,8 +100,23 @@ public class PlayerController : MonoBehaviour
             Vector3.up * verticalVelocity;
 
         controller.Move(finalMove * Time.deltaTime);
-    }
 
+        UpdateMoveAnimation(moveInput);
+    }
+    private void UpdateMoveAnimation(Vector2 moveInput)
+    {
+        int moveX = 0;
+        int moveZ = 0;
+
+        if (moveInput.x > 0.1f) moveX = 1;
+        else if (moveInput.x < -0.1f) moveX = -1;
+
+        if (moveInput.y > 0.1f) moveZ = 1;
+        else if (moveInput.y < -0.1f) moveZ = -1;
+
+        animator.SetInteger("moveX", moveX);
+        animator.SetInteger("moveZ", moveZ);
+    }
     private void HandleRotation()
     {
         float yaw = cameraController.CurrentYaw;

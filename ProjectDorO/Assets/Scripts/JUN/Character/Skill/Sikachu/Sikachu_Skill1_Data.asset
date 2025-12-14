@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73f081b14774034fa9890506dc7ba6b, type: 3}
+  m_Name: Sikachu_Skill1_Data
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  useCasting: 0
+  castingEffectPrefab: {fileID: 0}
+  animation: {fileID: 7400000, guid: 5760fa24717f38b459c0644985131f07, type: 2}
+  effectPrefab: {fileID: 4917898690074006872, guid: f2d1b51dadcaacb4bbcf723124986586, type: 3}
+  spawnType: 4
+  spawnOffset: {x: 0, y: 0, z: 0}
+  forwardOffset: 0
+  projectileSpeed: 0
+  duration: 0
+  range: 0
+  damage: 0
+  attackType: 0
+  cooldown: 0

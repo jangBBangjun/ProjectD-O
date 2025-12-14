@@ -28,6 +28,12 @@ public class Sub_Enemy : MonoBehaviour
     public string ratTag = "Rat";
     public string playerTag = "Player";
 
+    [Header("공격 설정")]
+    [SerializeField] private GameObject attackHitboxPrefab; // Damager 포함
+    [SerializeField] private Transform attackSpawnPoint;
+    [SerializeField] private int attackDamage = 10;
+    [SerializeField] private AttackType attackType;
+
     private int patrolIndex = 0;
     private float stateTimer = 0f;
     private float lastAttackTime = -999f;
@@ -160,7 +166,25 @@ public class Sub_Enemy : MonoBehaviour
                 break;
         }
     }
+    public void AnimEvent_AttackHit()
+    {
+        if (!attackHitboxPrefab || !attackSpawnPoint)
+            return;
 
+        GameObject hitbox = Instantiate(
+            attackHitboxPrefab,
+            attackSpawnPoint.position,
+            attackSpawnPoint.rotation
+        );
+
+        if (hitbox.TryGetComponent(out Damager damager))
+        {
+            Vector3 dir = (closestPlayer.transform.position - transform.position).normalized;
+            damager.Init(CreateDamageData(dir));
+        }
+
+        Destroy(hitbox, 0.3f); // 근접 공격 판정 시간
+    }
     void HandleIdle()
     {
         stateTimer += Time.deltaTime;
@@ -282,7 +306,16 @@ public class Sub_Enemy : MonoBehaviour
         targetListenPosition = targetPos;
         TransitionToState(State.Listen);
     }
-
+    private DamageData CreateDamageData(Vector3 hitDir)
+    {
+        return new DamageData
+        {
+            damageAmount = attackDamage,
+            attacker = gameObject,
+            attackType = attackType,
+            hitDirection = hitDir
+        };
+    }
     public void Die()
     {
         if (isDead) return;
