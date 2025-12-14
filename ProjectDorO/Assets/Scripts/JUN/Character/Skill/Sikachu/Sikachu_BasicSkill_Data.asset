@@ -15,13 +15,13 @@ MonoBehaviour:
   useCasting: 0
   castingEffectPrefab: {fileID: 0}
   animation: {fileID: 7400000, guid: a323c0cc8d366bb438977079fc24fc74, type: 2}
-  effectPrefab: {fileID: 4907824851830923052, guid: 9ddcd0e3d9c51c94fa5abe914078fde8, type: 3}
+  effectPrefab: {fileID: 7735230226886193318, guid: f496995bc713d334b86f2bfec8bc9716, type: 3}
   spawnType: 4
   spawnOffset: {x: 0, y: 0, z: 0}
   forwardOffset: 0
   projectileSpeed: 0
   duration: 0
   range: 0
-  damage: 0
+  damage: 30
   attackType: 0
-  cooldown: 0
+  cooldown: 0.5
