@@ -8,6 +8,8 @@ public class Sub_AnimBar : MonoBehaviour
     private Image valueImage;
     private Image animImage;
 
+    [SerializeField] private CharacterHealth health;
+
     [SerializeField] private float changeBarValueSpeed = 1f;
     [SerializeField] private float changeBarDelay = 0.2f;
     [SerializeField] private float changeBarAnimSpeed = 2f;
@@ -16,6 +18,7 @@ public class Sub_AnimBar : MonoBehaviour
     {
         animImage = transform.GetChild(1).GetComponent<Image>();
         valueImage = transform.GetChild(2).GetComponent<Image>();
+        health.OnHealthChanged.AddListener(SetBar);
     }
     public void SetBar(int value, int maxValue)
     {
