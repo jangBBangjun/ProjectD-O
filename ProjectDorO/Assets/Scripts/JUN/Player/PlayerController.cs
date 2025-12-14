@@ -108,16 +108,16 @@ public class PlayerController : MonoBehaviour
     private void HandleActions()
     {
         if (input.AttackTriggered)
-            combat?.BasicAttack();
+            combat.BasicAttack();
 
-        if (input.Skill1Triggered)
-            combat?.Skill1();
+        else if (input.Skill1Triggered)
+            combat.Skill1();
 
-        if (input.Skill2Triggered)
-            combat?.Skill2();
+        else if (input.Skill2Triggered)
+            combat.Skill2();
 
-        if (input.Skill3Triggered)
-            combat?.Ultimate();
+        else if (input.Skill3Triggered)
+            combat.Ultimate();
     }
 
 }

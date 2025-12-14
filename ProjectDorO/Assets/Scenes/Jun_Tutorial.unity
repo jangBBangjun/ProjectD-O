@@ -11131,6 +11131,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3360910956685413314, guid: 6d51d69e604a1ed48a53a20b2e677ea9, type: 3}
+--- !u!1 &934479495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934479496}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &934479496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934479495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &935722895
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11262,6 +11293,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
       insertIndex: -1
       addedObject: {fileID: 946360686}
+    - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946360701}
     - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
       insertIndex: -1
       addedObject: {fileID: 946360695}
@@ -11462,6 +11496,22 @@ MonoBehaviour:
   slot: 1
   skillDisplayName: "\uBBF8\uC815\uC774\uC2A4\uD0AC1"
   cameraTransform: {fileID: 363758010}
+--- !u!114 &946360701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b90ac9c78482b44aad247434c008da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillAnimationBridge
+  basic: {fileID: 946360695}
+  skill1: {fileID: 946360699}
+  skill2: {fileID: 946360698}
+  ultimate: {fileID: 946360697}
 --- !u!1 &955730769 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2190187358674555268, guid: a12f6c0a94c8a1242aa40d3858f442c8, type: 3}
@@ -14715,24 +14765,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213917785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc2fc0f9ef19eb640bab69df65103534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openMapSize: {x: 1300, y: 1300}
   canvas: {fileID: 1694513521}
   AllRect: {fileID: 427132809}
   moveRect: {fileID: 2118094350}
   playerGrid: {fileID: 100758734}
+  maskImage: {fileID: 0}
+  maskSprites: []
+  frameImage: {fileID: 0}
+  frameSprites: []
+  otherImage: {fileID: 0}
   iconParent: {fileID: 1285804033}
-  iconSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  iconPrefabs: []
   iconSize: 20
+  bigIconSize: 40
+  seeSize: 20
+  bigSeeSize: 80
   worldCenter: {x: 0, y: 25}
   worldSize: {x: 63, y: 63}
   selectionBoxImage: {fileID: 1246348950}
   target: {fileID: 0}
   minimapCamera: {fileID: 1525110051}
-  batchPoint: {fileID: 195101772}
   dropImage: {fileID: 1763319696}
   playerSprites:
   - {fileID: 21300000, guid: fb32f48de8c32a249809b3c15a0f004f, type: 3}
@@ -14973,7 +15031,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213917785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a510beb30a836d249b0e3f0859e709e6, type: 3}
   m_Name: 
@@ -14987,7 +15045,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213917785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f20062d0825488849817edf1a7d6191c, type: 3}
   m_Name: 
@@ -15000,7 +15058,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213917785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb8f88eb33689e64094d62be7982acca, type: 3}
   m_Name: 
@@ -15053,7 +15111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213917785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e5e03fea8c7cf54eb4a9aa3cd68a632, type: 3}
   m_Name: 
@@ -15084,6 +15142,7 @@ MonoBehaviour:
   - OriginImage: {fileID: 1598913299}
     ToggleImage: {fileID: 651767856}
     LayOutImage: {fileID: 1276098980}
+  skillSprites: []
   worldHp: {fileID: 997683635}
   mainHpBar: {fileID: 1510831821}
   playerHpBars:
@@ -29681,6 +29740,10 @@ PrefabInstance:
       propertyPath: skills.Array.data[2].skillCooldown
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6278340578685680089, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -29688,18 +29751,18 @@ PrefabInstance:
       insertIndex: 0
       addedObject: {fileID: 397006009}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 799332559642359583, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 1310980994}
-    - targetCorrespondingSourceObject: {fileID: 1189838997160382946, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 314044159}
-    - targetCorrespondingSourceObject: {fileID: 1479319277633565129, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 1591617471}
     - targetCorrespondingSourceObject: {fileID: 3036858341215369163, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       insertIndex: 3
       addedObject: {fileID: 135703987}
+    - targetCorrespondingSourceObject: {fileID: 799332559642359583, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1310980994}
+    - targetCorrespondingSourceObject: {fileID: 1479319277633565129, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1591617471}
+    - targetCorrespondingSourceObject: {fileID: 1189838997160382946, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 314044159}
     - targetCorrespondingSourceObject: {fileID: 805024157153382005, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       insertIndex: 3
       addedObject: {fileID: 168448446}
@@ -29817,3 +29880,4 @@ SceneRoots:
   - {fileID: 489673587}
   - {fileID: 1637311403}
   - {fileID: 2119435818}
+  - {fileID: 934479496}
