@@ -2,23 +2,14 @@ using UnityEngine;
 
 public class MijeongCombat : MonoBehaviour, ICharacterCombat
 {
-    public void BasicAttack()
-    {
-        
-    }
+    public ISkill basic;
+    public ISkill skill1;
+    public ISkill skill2;
+    public ISkill ultimate;
 
-    public void Skill1()
-    {
-        
-    }
+    public void BasicAttack() => basic?.Execute();
+    public void Skill1() => skill1?.Execute();
+    public void Skill2() => skill2?.Execute();
+    public void Ultimate() => ultimate?.Execute();
 
-    public void Skill2()
-    {
-       
-    }
-
-    public void Ultimate()
-    {
-       
-    }
 }
