@@ -11267,13 +11267,13 @@ PrefabInstance:
       addedObject: {fileID: 946360695}
     - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 946360694}
+      addedObject: {fileID: 946360699}
     - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 946360693}
+      addedObject: {fileID: 946360698}
     - targetCorrespondingSourceObject: {fileID: 952501811692522345, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 946360692}
+      addedObject: {fileID: 946360697}
   m_SourcePrefab: {fileID: 100100000, guid: 735646b6ec2bc5c4dbbd4ae48ae4a022, type: 3}
 --- !u!1 &946360680 stripped
 GameObject:
@@ -11382,45 +11382,6 @@ MonoBehaviour:
   gravity: -20
   jumpBufferTime: 0.15
   coyoteTime: 0.1
---- !u!114 &946360692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 946360680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78aa90f136c5902408b747ad1856abc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestSkill3Active
-  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
---- !u!114 &946360693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 946360680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfe84499865f7cf4ba188cacf2865c4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestSkill2Active
-  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
---- !u!114 &946360694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 946360680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c5c92dbc03661499725341724ff07a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestSkillActive
-  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
 --- !u!114 &946360695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11434,6 +11395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestBasicSkillActive
   data: {fileID: 11400000, guid: a62a10febac0d3e4eb95770e6bc4e161, type: 2}
+  slot: 0
+  skillDisplayName: "\uBBF8\uC815\uC774\uAE30\uBCF8\uACF5\uACA9"
+  cameraTransform: {fileID: 363758010}
 --- !u!114 &946360696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11447,9 +11411,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCombat
   basic: {fileID: 946360695}
-  skill1: {fileID: 946360694}
-  skill2: {fileID: 946360693}
-  ultimate: {fileID: 946360692}
+  skill1: {fileID: 946360699}
+  skill2: {fileID: 946360698}
+  ultimate: {fileID: 946360697}
+--- !u!114 &946360697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4675e27678442a47bffc89a2f58445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestBasicSkillActive
+  data: {fileID: 11400000, guid: dfd6e61b827144b4aa78e8b23aba9fee, type: 2}
+  slot: 3
+  skillDisplayName: "\uBBF8\uC815\uC774\uAD81\uADF9\uAE30"
+  cameraTransform: {fileID: 363758010}
+--- !u!114 &946360698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4675e27678442a47bffc89a2f58445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestBasicSkillActive
+  data: {fileID: 11400000, guid: 915552fcb80d14d4a892ae077f778f6d, type: 2}
+  slot: 2
+  skillDisplayName: "\uBBF8\uC815\uC774\uC2A4\uD0AC2"
+  cameraTransform: {fileID: 363758010}
+--- !u!114 &946360699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946360680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4675e27678442a47bffc89a2f58445d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestBasicSkillActive
+  data: {fileID: 11400000, guid: 1b60f91b793a6bc44b6bc6121eeb5861, type: 2}
+  slot: 1
+  skillDisplayName: "\uBBF8\uC815\uC774\uC2A4\uD0AC1"
+  cameraTransform: {fileID: 363758010}
 --- !u!1 &955730769 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2190187358674555268, guid: a12f6c0a94c8a1242aa40d3858f442c8, type: 3}
@@ -23587,6 +23599,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 66159664719695952, guid: 6d51d69e604a1ed48a53a20b2e677ea9, type: 3}
+--- !u!1 &1686888718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6278340578685680089, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+  m_PrefabInstance: {fileID: 4737781115859811761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1686888723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686888718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee68a0a215ba0d429cf2dbb0958f1a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damager
+  hitPolicy: 0
+  hitInterval: 0.5
 --- !u!64 &1687515952
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29672,6 +29703,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 805024157153382005, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
       insertIndex: 3
       addedObject: {fileID: 168448446}
+    - targetCorrespondingSourceObject: {fileID: 6278340578685680089, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1686888723}
   m_SourcePrefab: {fileID: 100100000, guid: d1a386cfea882af45aec9ae16c6aa412, type: 3}
 --- !u!4 &5334263949056047168
 Transform:
