@@ -631,6 +631,16 @@ public class Sub_MiniMapManager : MonoBehaviour
         if (targets.Exists(t => t.rigid == rigid)) return;
         targets.Add(new Target(type, rigid));
     }
+    public void RemoveTarget(Rigidbody rigid)
+    {
+        Target target = targets.Find(t => t.rigid == rigid);
+        if (target != null)
+        {
+            if (target.image != null)
+                Destroy(target.image.gameObject);
+            targets.Remove(target);
+        }
+    }
 
     // -------------------- 기즈모 --------------------
 

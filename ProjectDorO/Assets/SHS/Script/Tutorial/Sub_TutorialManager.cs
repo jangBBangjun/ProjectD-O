@@ -8,6 +8,7 @@ public class Sub_TutorialManager : MonoBehaviour
     [SerializeField] Sub_EntityManager entityManager;
     [SerializeField] private Sub_MiniMapInputReceiver miniMapInputReceiver;
     [SerializeField] private Sub_MiniMapManager miniMapManager;
+    [SerializeField] private string nextSceneName;
 
     [Serializable]
     private class TutorialStep
@@ -121,6 +122,8 @@ public class Sub_TutorialManager : MonoBehaviour
 
         miniMapInputReceiver.miniMapLock = false;
         Debug.Log("튜토리얼 종료");
+
+        Sub_LoadingManager.LoadScene(nextSceneName);
         yield return null;
     }
 
