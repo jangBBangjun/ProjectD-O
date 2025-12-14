@@ -11638,7 +11638,7 @@ GameObject:
   - component: {fileID: 883328742}
   - component: {fileID: 883328747}
   - component: {fileID: 883328746}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Burn_StrawDoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15484,6 +15484,10 @@ PrefabInstance:
       value: Origin_StrawDoll
       objectReference: {fileID: 0}
     - target: {fileID: 3402314819259796066, guid: de19ed5d5a5c60e4d8aa1f67d5c8cb43, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3402314819259796066, guid: de19ed5d5a5c60e4d8aa1f67d5c8cb43, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -15566,7 +15570,7 @@ GameObject:
   - component: {fileID: 1207057154}
   - component: {fileID: 1207057160}
   - component: {fileID: 1207057159}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Origin_StrawDoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15664,7 +15668,7 @@ GameObject:
   - component: {fileID: 1210547334}
   - component: {fileID: 1210547339}
   - component: {fileID: 1210547338}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitted_StrawDoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16294,21 +16298,21 @@ MonoBehaviour:
     ToggleImage: {fileID: 651767856}
     LayOutImage: {fileID: 1276098980}
   skillSprites:
-  - skill_1: {fileID: 21300000, guid: fb32f48de8c32a249809b3c15a0f004f, type: 3}
-    skill_2: {fileID: 21300000, guid: fb32f48de8c32a249809b3c15a0f004f, type: 3}
-    skill_3: {fileID: 21300000, guid: fb32f48de8c32a249809b3c15a0f004f, type: 3}
-  - skill_1: {fileID: 21300000, guid: e3d337d90ff890d4b9eec995587131dc, type: 3}
-    skill_2: {fileID: 21300000, guid: e3d337d90ff890d4b9eec995587131dc, type: 3}
-    skill_3: {fileID: 21300000, guid: e3d337d90ff890d4b9eec995587131dc, type: 3}
-  - skill_1: {fileID: 21300000, guid: e1f2ffd94fd72c746ac1923ab5399a21, type: 3}
-    skill_2: {fileID: 21300000, guid: e1f2ffd94fd72c746ac1923ab5399a21, type: 3}
-    skill_3: {fileID: 21300000, guid: e1f2ffd94fd72c746ac1923ab5399a21, type: 3}
-  - skill_1: {fileID: 21300000, guid: 8d06841410e0e3c47bfb5eccfeb27b91, type: 3}
-    skill_2: {fileID: 21300000, guid: 8d06841410e0e3c47bfb5eccfeb27b91, type: 3}
-    skill_3: {fileID: 21300000, guid: 8d06841410e0e3c47bfb5eccfeb27b91, type: 3}
-  - skill_1: {fileID: 21300000, guid: 50d5d778db4b76d4d9ee26a31a243825, type: 3}
-    skill_2: {fileID: 21300000, guid: 50d5d778db4b76d4d9ee26a31a243825, type: 3}
-    skill_3: {fileID: 21300000, guid: 50d5d778db4b76d4d9ee26a31a243825, type: 3}
+  - skill_1: {fileID: 21300000, guid: ad64603ff3a7c484ea77b3a6b0b22171, type: 3}
+    skill_2: {fileID: 21300000, guid: 0c1f6016cc85b8945b9da6da7fc4de11, type: 3}
+    skill_3: {fileID: 21300000, guid: a89173cd3d0af9c49bc85400979da91d, type: 3}
+  - skill_1: {fileID: 21300000, guid: a27c82beac4aca14a9b729c81a64a3b3, type: 3}
+    skill_2: {fileID: 21300000, guid: 9278da2d3b906854bbb38bdb682993b1, type: 3}
+    skill_3: {fileID: 21300000, guid: 6c309ec00e78c1b4d9b1e2eac1caab3e, type: 3}
+  - skill_1: {fileID: 21300000, guid: 9877c8e304fec404e9daa5b3a5e2a5dd, type: 3}
+    skill_2: {fileID: 21300000, guid: ca731f294d256684994086722ff96bc3, type: 3}
+    skill_3: {fileID: 21300000, guid: 5c62601ab75d96e49afb2d1b89ce6354, type: 3}
+  - skill_1: {fileID: 21300000, guid: d85174e5f9710e242aaa6e0a17bba7aa, type: 3}
+    skill_2: {fileID: 21300000, guid: 64a4841f2f0e7814b8a0aba8d8ac90fa, type: 3}
+    skill_3: {fileID: 21300000, guid: 5ee50b9f465fb9949aab4ac4e3a36d02, type: 3}
+  - skill_1: {fileID: 21300000, guid: 8ef0d693b681afb468fe390d86ce4044, type: 3}
+    skill_2: {fileID: 21300000, guid: 426ee743659ca9f409c4ac3f9921b816, type: 3}
+    skill_3: {fileID: 21300000, guid: 4542018e95287a54ba83b7bf4924176e, type: 3}
   worldHp: {fileID: 997683635}
   mainHpBar: {fileID: 1510831821}
   playerHpBars:
@@ -29223,7 +29227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068030411}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.86, y: 4.5356374, z: 39.79624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29232,7 +29236,7 @@ Transform:
   - {fileID: 1210547334}
   - {fileID: 883328742}
   m_Father: {fileID: 269577639}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!64 &2068030413
 MeshCollider:
   m_ObjectHideFlags: 0

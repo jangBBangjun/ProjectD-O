@@ -123,6 +123,24 @@ public class Sub_TutorialManager : MonoBehaviour
         miniMapInputReceiver.miniMapLock = false;
         Debug.Log("튜토리얼 종료");
 
+        miniMapInputReceiver.miniMapLock = false;
+
+        while (Keyboard.current.enterKey.isPressed == false)
+        {
+            if (Keyboard.current.digit1Key.isPressed)
+                entityManager.PlayerSeclect(0);
+            else if (Keyboard.current.digit2Key.isPressed)
+                entityManager.PlayerSeclect(1);
+            else if (Keyboard.current.digit3Key.isPressed)
+                entityManager.PlayerSeclect(2);
+            else if (Keyboard.current.digit4Key.isPressed)
+                entityManager.PlayerSeclect(3);
+            else if (Keyboard.current.digit5Key.isPressed)
+                entityManager.PlayerSeclect(4);
+
+            yield return null;
+        }
+
         Sub_LoadingManager.LoadScene(nextSceneName);
         yield return null;
     }
