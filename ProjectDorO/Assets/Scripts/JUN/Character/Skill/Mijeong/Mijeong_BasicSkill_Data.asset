@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73f081b14774034fa9890506dc7ba6b, type: 3}
   m_Name: Mijeong_BasicSkill_Data
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillName: Basic
   cooldown: 0.5
   animation: {fileID: 7400000, guid: b08d36400a021f34c919dbd8906dddd6, type: 2}
   effectPrefab: {fileID: 4777966663862505722, guid: 45354ac9ee12c2246917e6dbfba32277, type: 3}
+  spawnType: 3
+  spawnOffset: {x: 0, y: 0, z: 0}
+  forwardOffset: 0
+  projectileSpeed: 0
+  duration: 0
+  range: 0
   damage: 5
+  attackType: 0
